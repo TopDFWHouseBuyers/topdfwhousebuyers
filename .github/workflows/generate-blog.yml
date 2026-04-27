@@ -26,10 +26,12 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scripts/generate_post.py
-      - name: Commit and push new post
+      - name: Update sitemap
+        run: python scripts/generate_sitemap.py
+      - name: Commit and push
         run: |
           git config --global user.name "TopDFW Blog Bot"
           git config --global user.email "bot@topdfwhousebuyers.com"
           git add -A
-          git diff --staged --quiet || git commit -m "Auto: New blog post $(date '+%A %B %d %Y')"
+          git diff --staged --quiet || git commit -m "Auto: New blog post + sitemap $(date '+%A %B %d %Y')"
           git push
