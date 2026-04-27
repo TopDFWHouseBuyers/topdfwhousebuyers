@@ -522,12 +522,19 @@ footer a{{color:#4ab840;text-decoration:none}}
         <strong>4.</strong> Walk away with cash
       </p>
     </div>
+    <div class="sidebar-card">
+      <h3>⭐ Happy With Your Sale?</h3>
+      <p style="font-size:12px;color:#52675f;line-height:1.6;margin-bottom:12px">We'd love a Google review — it takes 30 seconds and helps other homeowners find us.</p>
+      <a href="https://share.google/vGlYZ46PBCsE6BPhz" target="_blank" rel="noopener" style="display:block;background:#4ab840;color:#fff;padding:10px;font-weight:700;font-size:11px;text-decoration:none;border-radius:2px;letter-spacing:0.06em;text-transform:uppercase;text-align:center">Leave a Google Review ⭐</a>
+    </div>
   </div>
 </div>
 
 <footer>
   © {year} Top DFW House Buyers · <a href="/">topdfwhousebuyers.com</a> · 972-284-9713 · TX License #0657354<br>
-  Serving Plano, Frisco, Allen, McKinney, Richardson, The Colony, Lewisville, Flower Mound, Keller, Grapevine, Colleyville, Southlake and all DFW cities
+  Serving Plano, Frisco, Allen, McKinney, Richardson, The Colony, Lewisville, Flower Mound, Keller, Grapevine, Colleyville, Southlake and all DFW cities<br><br>
+  <a href="https://share.google/vGlYZ46PBCsE6BPhz" target="_blank" rel="noopener" style="color:#4ab840">⭐ Leave us a Google Review</a> &nbsp;·&nbsp;
+  <a href="https://www.facebook.com/TopDFWHouseBuyers/" target="_blank" rel="noopener" style="color:#4ab840">Facebook</a>
 </footer>
 
 </body>
