@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Top DFW House Buyers — Automated Blog Generator
+Top DFW House Buyers  -  Automated Blog Generator
 Runs on GitHub Actions every Monday and Thursday at 8am CT
 Generates SEO-optimized blog posts using Claude API
 """
@@ -26,13 +26,13 @@ CITIES = [
 ]
 
 CITY_TOPICS = [
-    "How to Sell Your House Fast in {city}, TX — No Fees, No Repairs",
-    "We Buy Houses in {city}, TX — Get a Cash Offer in 24 Hours",
-    "Sell My House Fast {city} TX — The Complete Guide",
-    "Cash Home Buyers in {city}, TX — What You Need to Know",
-    "Selling Your {city} Home As-Is — Everything You Need to Know",
+    "How to Sell Your House Fast in {city}, TX  -  No Fees, No Repairs",
+    "We Buy Houses in {city}, TX  -  Get a Cash Offer in 24 Hours",
+    "Sell My House Fast {city} TX  -  The Complete Guide",
+    "Cash Home Buyers in {city}, TX  -  What You Need to Know",
+    "Selling Your {city} Home As-Is  -  Everything You Need to Know",
     "How to Avoid Foreclosure in {city}, TX",
-    "Selling an Inherited Property in {city}, TX — A Step-by-Step Guide",
+    "Selling an Inherited Property in {city}, TX  -  A Step-by-Step Guide",
     "Selling a House During Divorce in {city}, TX",
     "Tired Landlord? How to Sell Your Rental Property in {city}, TX Fast",
     "Relocating from {city}, TX? How to Sell Your Home Fast",
@@ -43,7 +43,7 @@ CITY_TOPICS = [
 EVERGREEN_TOPICS = [
     # DIVORCE
     {
-        "title": "Selling a House During Divorce in Texas — Everything You Need to Know",
+        "title": "Selling a House During Divorce in Texas  -  Everything You Need to Know",
         "slug": "selling-house-during-divorce-texas",
         "keyword": "selling house during divorce Texas",
         "category": "divorce"
@@ -62,19 +62,19 @@ EVERGREEN_TOPICS = [
     },
     # FORECLOSURE
     {
-        "title": "How to Stop Foreclosure in Texas — Your Options Explained",
+        "title": "How to Stop Foreclosure in Texas  -  Your Options Explained",
         "slug": "stop-foreclosure-texas",
         "keyword": "stop foreclosure Texas",
         "category": "foreclosure"
     },
     {
-        "title": "Pre-Foreclosure in Texas — What It Means and What You Can Do",
+        "title": "Pre-Foreclosure in Texas  -  What It Means and What You Can Do",
         "slug": "pre-foreclosure-texas",
         "keyword": "pre-foreclosure Texas",
         "category": "foreclosure"
     },
     {
-        "title": "Selling Your Home Before Foreclosure in Texas — Is It Possible?",
+        "title": "Selling Your Home Before Foreclosure in Texas  -  Is It Possible?",
         "slug": "sell-home-before-foreclosure-texas",
         "keyword": "sell home before foreclosure Texas",
         "category": "foreclosure"
@@ -93,7 +93,7 @@ EVERGREEN_TOPICS = [
     },
     # INHERITANCE
     {
-        "title": "Selling an Inherited House in Texas — A Complete Guide",
+        "title": "Selling an Inherited House in Texas  -  A Complete Guide",
         "slug": "selling-inherited-house-texas",
         "keyword": "selling inherited house Texas",
         "category": "inheritance"
@@ -111,13 +111,13 @@ EVERGREEN_TOPICS = [
         "category": "inheritance"
     },
     {
-        "title": "Selling an Estate Property in Texas — Cash Sale vs. Traditional Listing",
+        "title": "Selling an Estate Property in Texas  -  Cash Sale vs. Traditional Listing",
         "slug": "selling-estate-property-texas",
         "keyword": "selling estate property Texas",
         "category": "inheritance"
     },
     {
-        "title": "Texas Probate Process for Selling a House — What Heirs Need to Know",
+        "title": "Texas Probate Process for Selling a House  -  What Heirs Need to Know",
         "slug": "texas-probate-process-selling-house",
         "keyword": "Texas probate process selling house",
         "category": "inheritance"
@@ -130,7 +130,7 @@ EVERGREEN_TOPICS = [
         "category": "education"
     },
     {
-        "title": "Cash Offer vs. Traditional Sale in Texas — Which Is Better for You?",
+        "title": "Cash Offer vs. Traditional Sale in Texas  -  Which Is Better for You?",
         "slug": "cash-offer-vs-traditional-sale-texas",
         "keyword": "cash offer vs traditional sale Texas",
         "category": "education"
@@ -148,7 +148,7 @@ EVERGREEN_TOPICS = [
         "category": "education"
     },
     {
-        "title": "The Real Cost of Selling a House in Texas — Fees, Commissions, and Hidden Costs",
+        "title": "The Real Cost of Selling a House in Texas  -  Fees, Commissions, and Hidden Costs",
         "slug": "real-cost-selling-house-texas",
         "keyword": "cost of selling a house Texas",
         "category": "education"
@@ -160,7 +160,7 @@ EVERGREEN_TOPICS = [
         "category": "education"
     },
     {
-        "title": "Selling a House As-Is in Texas — What Sellers Need to Know",
+        "title": "Selling a House As-Is in Texas  -  What Sellers Need to Know",
         "slug": "selling-house-as-is-texas",
         "keyword": "selling house as-is Texas",
         "category": "education"
@@ -185,7 +185,7 @@ EVERGREEN_TOPICS = [
     },
     # SPECIFIC SITUATIONS
     {
-        "title": "Selling a House With Tenants in Texas — Landlord's Complete Guide",
+        "title": "Selling a House With Tenants in Texas  -  Landlord's Complete Guide",
         "slug": "selling-house-with-tenants-texas",
         "keyword": "selling house with tenants Texas",
         "category": "situations"
@@ -245,20 +245,20 @@ EVERGREEN_TOPICS = [
         "category": "situations"
     },
     {
-        "title": "Selling a Rental Property in Texas — Cash Sale vs. 1031 Exchange",
+        "title": "Selling a Rental Property in Texas  -  Cash Sale vs. 1031 Exchange",
         "slug": "selling-rental-property-texas",
         "keyword": "selling rental property Texas",
         "category": "situations"
     },
     {
-        "title": "Downsizing in Texas — How to Sell Your Family Home Fast",
+        "title": "Downsizing in Texas  -  How to Sell Your Family Home Fast",
         "slug": "downsizing-texas-sell-family-home",
         "keyword": "downsizing Texas sell home fast",
         "category": "situations"
     },
     # DFW MARKET
     {
-        "title": "DFW Real Estate Market 2025 — What Sellers Need to Know",
+        "title": "DFW Real Estate Market 2025  -  What Sellers Need to Know",
         "slug": "dfw-real-estate-market-2025-sellers",
         "keyword": "DFW real estate market 2025 sellers",
         "category": "market"
@@ -270,7 +270,7 @@ EVERGREEN_TOPICS = [
         "category": "market"
     },
     {
-        "title": "Why DFW Home Prices Are Still Strong — And What It Means for Sellers",
+        "title": "Why DFW Home Prices Are Still Strong  -  And What It Means for Sellers",
         "slug": "dfw-home-prices-sellers",
         "keyword": "DFW home prices sellers",
         "category": "market"
@@ -340,21 +340,21 @@ COMPANY INFO:
 - Phone: 972-284-9713
 - Website: https://www.topdfwhousebuyers.com
 - License: TX Real Estate License #0657354
-- Service area: All of DFW — Plano, Frisco, Allen, McKinney, Richardson, The Colony, Lewisville, Flower Mound, Keller, Grapevine, Colleyville, Southlake, North Richland Hills, Hurst, Euless, Bedford, Watauga, Prosper, Celina, Anna, Melissa, Dallas and all surrounding areas
+- Service area: All of DFW  -  Plano, Frisco, Allen, McKinney, Richardson, The Colony, Lewisville, Flower Mound, Keller, Grapevine, Colleyville, Southlake, North Richland Hills, Hurst, Euless, Bedford, Watauga, Prosper, Celina, Anna, Melissa, Dallas and all surrounding areas
 
 ASSIGNMENT:
 - Title: {topic['title']}
 - Primary keyword: {topic['keyword']}
 - Additional context: {topic['extra_context']}
-- Word count: 1,200–1,500 words
+- Word count: 1,200-1,500 words
 - Include 3 call-to-action sections throughout
-- Tone: Helpful, knowledgeable, empathetic — like a trusted local expert
+- Tone: Helpful, knowledgeable, empathetic  -  like a trusted local expert
 
 REQUIREMENTS:
 1. Write genuinely helpful content that answers real questions people have
 2. Use H2 and H3 subheadings naturally throughout
 3. Each CTA should mention 972-284-9713 and link to /#offer
-4. Natural conversational tone — not corporate or salesy
+4. Natural conversational tone  -  not corporate or salesy
 5. Include specific, practical advice relevant to Texas law/market where applicable
 6. Meta title must be under 60 characters
 7. Meta description must be under 160 characters
@@ -365,15 +365,18 @@ Return ONLY valid JSON (no markdown, no backticks, no explanation):
   "meta_description": "...",
   "h1": "...",
   "intro": "...(2-3 sentence intro paragraph)...",
-  "content_html": "...(full HTML using only h2, h3, p, ul, ol, li tags — NO html/head/body tags)...",
+  "content_html": "...(full HTML using only h2, h3, p, ul, ol, li tags  -  NO html/head/body tags)...",
   "word_count": 0,
   "secondary_keywords": ["...", "...", "..."]
 }}"""
 
+    # Ensure prompt is ASCII-safe
+    prompt_safe = prompt.encode('ascii', errors='replace').decode('ascii')
+    
     message = client.messages.create(
         model="claude-sonnet-4-5",
         max_tokens=4000,
-        messages=[{"role": "user", "content": prompt}]
+        messages=[{"role": "user", "content": prompt_safe}]
     )
 
     raw = message.content[0].text.strip()
@@ -488,7 +491,7 @@ footer a{{color:#4ab840;text-decoration:none}}
 
     <div class="cta-inline" style="margin-top:40px">
       <h3>Ready to Get Your Cash Offer?</h3>
-      <p>We buy houses anywhere in DFW — any condition, any situation. No fees, no repairs, no commissions. Get a fair cash offer within 24 hours and close on your timeline.</p>
+      <p>We buy houses anywhere in DFW  -  any condition, any situation. No fees, no repairs, no commissions. Get a fair cash offer within 24 hours and close on your timeline.</p>
       <a href="/#offer">Get My Free Cash Offer →</a>
     </div>
 
@@ -496,7 +499,7 @@ footer a{{color:#4ab840;text-decoration:none}}
       <h3>More Helpful Resources</h3>
       <div class="related-grid">
         <div class="related-card"><a href="/blog/what-is-cash-home-buyer-texas/">What Is a Cash Home Buyer? How the Process Works in Texas</a></div>
-        <div class="related-card"><a href="/blog/cash-offer-vs-traditional-sale-texas/">Cash Offer vs. Traditional Sale — Which Is Better?</a></div>
+        <div class="related-card"><a href="/blog/cash-offer-vs-traditional-sale-texas/">Cash Offer vs. Traditional Sale  -  Which Is Better?</a></div>
         <div class="related-card"><a href="/blog/real-cost-selling-house-texas/">The Real Cost of Selling a House in Texas</a></div>
       </div>
     </div>
@@ -532,7 +535,7 @@ footer a{{color:#4ab840;text-decoration:none}}
 
 
 def main():
-    print(f"Starting blog generation — {datetime.now().isoformat()}")
+    print(f"Starting blog generation  -  {datetime.now().isoformat()}")
 
     # Get topic for this run
     topic = get_next_topic()
