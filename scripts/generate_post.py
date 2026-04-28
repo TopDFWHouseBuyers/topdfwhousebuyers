@@ -470,6 +470,34 @@ footer a{{color:#4ab840;text-decoration:none}}
   gtag('js', new Date());
   gtag('config', 'G-QSBN8EDR9Z');
 </script>
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{
+      "@type": "Question",
+      "name": "How fast can Top DFW House Buyers close on my home?",
+      "acceptedAnswer": {{"@type": "Answer","text": "We can close in as few as 7 days anywhere in DFW. Call us at 972-284-9713."}}
+    }},
+    {{
+      "@type": "Question",
+      "name": "Do I need to make repairs before selling?",
+      "acceptedAnswer": {{"@type": "Answer","text": "Never. We buy houses in any condition - foundation issues, roof damage, fire damage. You don't spend a dollar on repairs."}}
+    }},
+    {{
+      "@type": "Question",
+      "name": "Are there any fees or commissions?",
+      "acceptedAnswer": {{"@type": "Answer","text": "Zero fees, zero commissions, zero closing costs. What we offer is exactly what you receive at closing."}}
+    }},
+    {{
+      "@type": "Question",
+      "name": "What areas of DFW do you buy houses in?",
+      "acceptedAnswer": {{"@type": "Answer","text": "We buy houses throughout Dallas-Fort Worth including Plano, Frisco, Allen, McKinney, Richardson, Keller, Arlington, Garland, Mesquite and all surrounding cities."}}
+    }}
+  ]
+}}
+</script>
 </head>
 <body>
 
