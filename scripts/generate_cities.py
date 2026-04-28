@@ -453,10 +453,7 @@ def main():
         output_dir = Path(slug)
         output_file = output_dir / "index.html"
 
-        # Skip if already exists
-        if output_file.exists():
-            print(f"  [{i+1}/{len(CITIES)}] Skipping {city['name']} — already exists")
-            continue
+      
 
         print(f"  [{i+1}/{len(CITIES)}] Generating {city['name']}...")
         try:
