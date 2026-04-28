@@ -1232,7 +1232,11 @@ function addChatMsg(text, type) {
   const msgs = document.getElementById('chat-messages');
   const msg = document.createElement('div');
   msg.className = 'chat-msg ' + type;
-  msg.textContent = text;
+  // Render **bold** markdown
+  msg.innerHTML = text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\n/g,'<br>');
   msgs.appendChild(msg);
   msgs.scrollTop = msgs.scrollHeight;
 }
