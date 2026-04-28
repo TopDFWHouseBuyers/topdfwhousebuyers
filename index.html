@@ -1111,8 +1111,8 @@ footer{
   <div class="chat-box" id="chat-box">
     <div class="chat-header">
       <div class="chat-header-text">
-        <h4>Top DFW House Buyers</h4>
-        <p>Typically replies in minutes</p>
+        <h4>Top DFW House Buyers <span style="background:#4ab840;color:#fff;font-size:9px;padding:1px 6px;border-radius:2px;font-weight:700;vertical-align:middle">AI</span></h4>
+        <p>Ask me anything about selling your home</p>
       </div>
       <button class="chat-close" onclick="toggleChat()">×</button>
     </div>
@@ -1124,7 +1124,7 @@ footer{
       <button class="chat-send" onclick="sendChat()">Send</button>
     </div>
   </div>
-  <button class="chat-btn" onclick="toggleChat()" title="Chat with us">💬</button>
+  <button class="chat-btn" onclick="toggleChat()" title="Chat with us — AI Powered">💬</button>
 </div>
 
 <script>
@@ -1213,19 +1213,19 @@ function toggleFaq(item) {
   if (!isOpen) item.classList.add('open');
 }
 
-// ── CHAT ──────────────────────────────────────────────────────────────────
-const chatResponses = [
-  { triggers: ['yes','yeah','sell','selling','house','home'], response: "Great! The fastest way to get your offer is to fill out the form above. Takes 60 seconds and we'll call you within 24 hours. Or you can call us directly at 972-284-9713." },
-  { triggers: ['repair','repairs','condition','damage','bad'], response: "Good news — we buy houses in ANY condition. Foundation issues, roof damage, fire damage, outdated kitchens — doesn't matter. You don't pay for any repairs." },
-  { triggers: ['fast','quick','urgent','foreclosure','soon'], response: "We can close in as few as 7 days. If you're facing a deadline, call us now at 972-284-9713 so we can move fast for you." },
-  { triggers: ['price','offer','much','worth','value'], response: "Our offers are based on the property's condition and comparable sales nearby. We're transparent about how we arrive at the number — no surprises. Fill out the form to get yours." },
-  { triggers: ['fee','commission','cost','charge'], response: "Zero fees. Zero commissions. Zero closing costs. What we offer is exactly what you get at closing. Nothing taken out." },
-  { triggers: ['plano','frisco','allen','mckinney','richardson','dallas','dfw','keller'], response: "Yes, we buy in that area! We serve all of DFW. Fill out the form above with your address and we'll get you an offer within 24 hours." },
-  { triggers: ['call','phone','contact','reach','talk'], response: "Call us anytime at 972-284-9713. We're available Mon–Sat 8am–7pm. Or fill out the form and we'll call you." },
-];
+// ── AI CHAT (Claude-powered) ──────────────────────────────────────────────
+let chatHistory = [];
+let chatLeadCaptured = false;
 
 function toggleChat() {
-  document.getElementById('chat-box').classList.toggle('open');
+  const box = document.getElementById('chat-box');
+  box.classList.toggle('open');
+  if (box.classList.contains('open') && chatHistory.length === 0) {
+    // First open — show greeting
+    setTimeout(() => {
+      addChatMsg("Hi! 👋 I'm Jason's assistant. Are you thinking about selling your DFW home? I can answer any questions you have about our cash buying process.", 'bot');
+    }, 300);
+  }
 }
 
 function addChatMsg(text, type) {
@@ -1237,21 +1237,67 @@ function addChatMsg(text, type) {
   msgs.scrollTop = msgs.scrollHeight;
 }
 
-function sendChat() {
+function addTypingIndicator() {
+  const msgs = document.getElementById('chat-messages');
+  const typing = document.createElement('div');
+  typing.className = 'chat-msg bot';
+  typing.id = 'typing-indicator';
+  typing.textContent = '...';
+  typing.style.opacity = '0.5';
+  typing.style.fontStyle = 'italic';
+  msgs.appendChild(typing);
+  msgs.scrollTop = msgs.scrollHeight;
+  return typing;
+}
+
+async function sendChat() {
   const input = document.getElementById('chat-input');
   const text = input.value.trim();
   if (!text) return;
+
   addChatMsg(text, 'user');
   input.value = '';
-  
-  setTimeout(() => {
-    const lower = text.toLowerCase();
-    const match = chatResponses.find(r => r.triggers.some(t => lower.includes(t)));
-    const response = match 
-      ? match.response 
-      : "Thanks for reaching out! The best way to get a quick answer is to call us at 972-284-9713 or fill out the form above for a cash offer.";
-    addChatMsg(response, 'bot');
-  }, 600);
+  input.disabled = true;
+
+  chatHistory.push({ role: 'user', content: text });
+
+  const typing = addTypingIndicator();
+
+  try {
+    const response = await fetch('/.netlify/functions/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: chatHistory })
+    });
+
+    const data = await response.json();
+    typing.remove();
+
+    if (!response.ok || data.error) {
+      addChatMsg("I'm having trouble right now. Please call us at 972-284-9713 or fill out the form above!", 'bot');
+      input.disabled = false;
+      return;
+    }
+
+    const reply = data.reply;
+    chatHistory.push({ role: 'assistant', content: reply });
+    addChatMsg(reply, 'bot');
+
+    // After 3 messages, gently prompt for contact info
+    if (chatHistory.length >= 6 && !chatLeadCaptured) {
+      chatLeadCaptured = true;
+      setTimeout(() => {
+        addChatMsg("Would you like a no-obligation cash offer? Just fill out the quick form above — takes 60 seconds and we'll call you within 30 minutes. 📋", 'bot');
+      }, 1000);
+    }
+
+  } catch(e) {
+    typing.remove();
+    addChatMsg("I'm having trouble connecting. Please call 972-284-9713 or fill out the form above — we'll get back to you quickly!", 'bot');
+  }
+
+  input.disabled = false;
+  input.focus();
 }
 
 // ── SCROLL REVEAL ─────────────────────────────────────────────────────────
