@@ -462,6 +462,14 @@ body{{background:#f8faf8;color:#1a1f1a;font-family:'Montserrat',sans-serif;font-
 footer{{background:#0a0a0a;color:rgba(255,255,255,0.5);text-align:center;padding:28px;font-size:12px;margin-top:0;border-top:3px solid #4ab840}}
 footer a{{color:#4ab840;text-decoration:none}}
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QSBN8EDR9Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){{dataLayer.push(arguments);}}
+  gtag('js', new Date());
+  gtag('config', 'G-QSBN8EDR9Z');
+</script>
 </head>
 <body>
 
