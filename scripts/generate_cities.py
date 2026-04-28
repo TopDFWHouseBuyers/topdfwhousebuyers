@@ -117,6 +117,54 @@ def build_city_page(content: dict, city: dict) -> str:
   "areaServed": "{city['name']}, Texas"
 }}
 </script>
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{
+      "@type": "Question",
+      "name": "How fast can you buy my house in {city['name']}, TX?",
+      "acceptedAnswer": {{
+        "@type": "Answer",
+        "text": "We can close in as few as 7 days in {city['name']}. If you need more time, we work around your schedule. Call us at 972-284-9713 to discuss your timeline."
+      }}
+    }},
+    {{
+      "@type": "Question",
+      "name": "Do I need to make repairs before selling my {city['name']} home?",
+      "acceptedAnswer": {{
+        "@type": "Answer",
+        "text": "Never. We buy houses in {city['name']} in any condition — foundation issues, roof damage, outdated systems, or heavy wear. You don't spend a single dollar on repairs."
+      }}
+    }},
+    {{
+      "@type": "Question",
+      "name": "Are there any fees or commissions when selling to Top DFW House Buyers?",
+      "acceptedAnswer": {{
+        "@type": "Answer",
+        "text": "Zero fees. Zero commissions. Zero closing costs. We cover all closing costs. What we offer is exactly what you receive at closing — no deductions."
+      }}
+    }},
+    {{
+      "@type": "Question",
+      "name": "How do you determine your cash offer for my {city['name']} property?",
+      "acceptedAnswer": {{
+        "@type": "Answer",
+        "text": "We analyze the property's condition, location, and recent comparable sales in {city['name']}. We're transparent about how we arrive at our number and show you exactly how we calculated it."
+      }}
+    }},
+    {{
+      "@type": "Question",
+      "name": "What types of {city['name']} properties do you buy?",
+      "acceptedAnswer": {{
+        "@type": "Answer",
+        "text": "We buy all types of residential properties in {city['name']} — single family homes, townhouses, condos, duplexes, and multi-family properties. Any condition, any situation."
+      }}
+    }}
+  ]
+}}
+</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QSBN8EDR9Z"></script>
 <script>
