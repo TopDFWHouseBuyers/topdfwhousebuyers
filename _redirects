@@ -1,0 +1,18 @@
+# Old Carrot pages -> new pages
+/testimonials/                          /                   301
+/contact-us/                            /#offer             301
+/home/                                  /                   301
+/our-company/                           /                   301
+/how-we-buy-houses/                     /#how               301
+/sell-your-house/                       /#offer             301
+
+# Old Carrot city URLs -> new city pages
+/sell-my-house-fast-grand-prairie-tx/   /grand-prairie/     301
+/sell-my-house-fast-irving-tx/          /#offer             301
+/sell-my-house-fast-carrollton-tx/      /carrollton/        301
+/sell-my-house-fast-mesquite-tx/        /mesquite/          301
+/sell-my-house-fast-richardson-tx/      /richardson/        301
+/sell-my-house-fast-frisco/             /frisco/            301
+
+# Old blog posts
+/blog/equity-when-buying-or-selling-a-house/    /blog/      301
