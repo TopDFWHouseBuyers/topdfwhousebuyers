@@ -1,10 +1,14 @@
 # Old Carrot pages -> new pages
 /testimonials/                          /                   301
 /contact-us/                            /#offer             301
+/contact-us                             /#offer             301
 /home/                                  /                   301
 /our-company/                           /                   301
 /how-we-buy-houses/                     /#how               301
 /sell-your-house/                       /#offer             301
+/get-a-cash-offer-today/                /#offer             301
+/privacy/                               /                   301
+/faq/                                   /                   301
 
 # Old Carrot city URLs -> new city pages
 /sell-my-house-fast-grand-prairie-tx/   /grand-prairie/     301
@@ -14,6 +18,19 @@
 /sell-my-house-fast-richardson-tx/      /richardson/        301
 /sell-my-house-fast-frisco/             /frisco/            301
 /sell-my-house-fast-arlington-tx/       /arlington/         301
+/sell-my-house-fast-plano/              /plano/             301
+/sell-my-house-fast-aubrey/             /#offer             301
+/we-buy-houses-farmers-branch/          /#offer             301
+/we-buy-houses-flower-mound/            /#offer             301
+/we-buy-houses-saginaw/                 /#offer             301
+/we-buy-houses-rowlett/                 /#offer             301
+/we-buy-houses-watauga/                 /#offer             301
+/we-buy-houses-mckinney/                /mckinney/          301
+/we-buy-houses-seagoville/              /#offer             301
 
-# Old blog posts
-/blog/equity-when-buying-or-selling-a-house/    /blog/      301
+# Old blog posts -> blog index
+/blog/equity-when-buying-or-selling-a-house/                /blog/  301
+/blog/asking-price-selling-your-house-fast-in-dallas-fort-worth/    /blog/  301
+/blog/ideas-for-reinvestment-in-dallas-fort-worth/          /blog/  301
+/blog/tips-for-selling-a-townhouse-in-dallas/               /blog/  301
+/blog/selling-your-house-sunrise/                           /blog/  301
