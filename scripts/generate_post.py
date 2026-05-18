@@ -38,20 +38,16 @@ CITY_TOPICS = [
 ]
 
 EVERGREEN_TOPICS = [
-    # DIVORCE
     {"title": "Selling a House During Divorce in Texas - Complete Guide", "slug": "selling-house-during-divorce-texas", "keyword": "selling house during divorce Texas", "category": "divorce"},
     {"title": "Texas Community Property Laws and Selling Your Home", "slug": "texas-community-property-selling-home", "keyword": "Texas community property selling home", "category": "divorce"},
     {"title": "How to Sell Your DFW Home Fast During Divorce", "slug": "sell-home-fast-divorce-dfw", "keyword": "sell home fast divorce DFW", "category": "divorce"},
-    # FORECLOSURE
     {"title": "How to Stop Foreclosure in Texas - Your Options", "slug": "stop-foreclosure-texas", "keyword": "stop foreclosure Texas", "category": "foreclosure"},
     {"title": "Pre-Foreclosure in DFW - What It Means for Homeowners", "slug": "pre-foreclosure-dfw-texas", "keyword": "pre-foreclosure DFW Texas", "category": "foreclosure"},
     {"title": "Selling Your DFW Home Before Foreclosure", "slug": "sell-home-before-foreclosure-texas", "keyword": "sell home before foreclosure Texas", "category": "foreclosure"},
     {"title": "Behind on Mortgage Payments in Texas? Your Options", "slug": "behind-on-mortgage-payments-texas", "keyword": "behind on mortgage payments Texas", "category": "foreclosure"},
-    # INHERITANCE
     {"title": "Selling an Inherited House in Texas - Complete Guide", "slug": "selling-inherited-house-texas", "keyword": "selling inherited house Texas", "category": "inheritance"},
     {"title": "Texas Probate Process for Selling a House", "slug": "texas-probate-process-selling-house", "keyword": "Texas probate selling house", "category": "inheritance"},
     {"title": "Selling an Inherited Property in DFW - Step by Step", "slug": "selling-inherited-property-dfw", "keyword": "selling inherited property DFW", "category": "inheritance"},
-    # EDUCATION
     {"title": "What Is a Cash Home Buyer? How It Works in DFW", "slug": "what-is-cash-home-buyer-dfw", "keyword": "what is a cash home buyer DFW", "category": "education"},
     {"title": "Cash Offer vs Traditional Sale in Texas - Which Is Better?", "slug": "cash-offer-vs-traditional-sale-texas", "keyword": "cash offer vs traditional sale Texas", "category": "education"},
     {"title": "The Real Cost of Selling a House in Texas", "slug": "real-cost-selling-house-texas", "keyword": "cost of selling a house Texas", "category": "education"},
@@ -60,7 +56,6 @@ EVERGREEN_TOPICS = [
     {"title": "Is It Better to Sell to a Cash Buyer or Agent in Texas?", "slug": "cash-buyer-vs-agent-texas", "keyword": "cash buyer vs agent Texas", "category": "education"},
     {"title": "How to Get a Fair Cash Offer on Your DFW Home", "slug": "fair-cash-offer-dfw-home", "keyword": "fair cash offer DFW home", "category": "education"},
     {"title": "What Happens at a Cash Home Sale Closing in Texas?", "slug": "cash-home-sale-closing-texas", "keyword": "cash home sale closing Texas", "category": "education"},
-    # SITUATIONS
     {"title": "Selling a House With Tenants in Texas - Landlord Guide", "slug": "selling-house-with-tenants-texas", "keyword": "selling house with tenants Texas", "category": "situations"},
     {"title": "Selling a Fire-Damaged Home in DFW", "slug": "sell-fire-damaged-home-dfw", "keyword": "sell fire damaged home DFW", "category": "situations"},
     {"title": "Selling a House With Foundation Problems in Texas", "slug": "selling-house-foundation-problems-texas", "keyword": "selling house foundation problems Texas", "category": "situations"},
@@ -71,7 +66,6 @@ EVERGREEN_TOPICS = [
     {"title": "Selling a Rental Property in Texas", "slug": "selling-rental-property-texas", "keyword": "selling rental property Texas", "category": "situations"},
     {"title": "How to Sell Your Texas Home When Relocating", "slug": "sell-home-relocating-texas", "keyword": "sell home relocating Texas", "category": "situations"},
     {"title": "Selling a House With Code Violations in Texas", "slug": "selling-house-code-violations-texas", "keyword": "selling house code violations Texas", "category": "situations"},
-    # DFW MARKET
     {"title": "DFW Real Estate Market 2025 - What Sellers Need to Know", "slug": "dfw-real-estate-market-2025", "keyword": "DFW real estate market 2025", "category": "market"},
     {"title": "Is Now a Good Time to Sell Your DFW Home?", "slug": "good-time-sell-dfw-home", "keyword": "good time sell DFW home", "category": "market"},
     {"title": "North Texas Home Prices - What Sellers Need to Know", "slug": "north-texas-home-prices-sellers", "keyword": "North Texas home prices sellers", "category": "market"},
@@ -134,37 +128,38 @@ ASSIGNMENT:
 - Title: {topic['title']}
 - Primary keyword: {topic['keyword']}
 - Additional context: {topic['extra_context']}
-- Word count: 1,200-1,500 words
-- Include 3 call-to-action sections
+- Word count: 800-1000 words
+- Include 2 call-to-action sections
 - Tone: Warm, helpful, professional but conversational
 
-REQUIREMENTS:
-1. Write genuinely helpful content for DFW homeowners
-2. Use H2 and H3 subheadings naturally
-3. Each CTA mentions 972-284-9713 and links to /#offer
-4. Include Texas-specific context - no state income tax, property taxes, homestead exemption
-5. Meta title under 60 characters
-6. Meta description under 160 characters
+CRITICAL REQUIREMENTS:
+1. Return ONLY a JSON object - no text before or after
+2. No markdown code fences
+3. All apostrophes in content_html must use HTML entity &apos; or be removed
+4. All double quotes inside JSON string values must be escaped with backslash
+5. Keep content_html under 3000 characters total
+6. Meta title under 60 characters
+7. Meta description under 160 characters
+8. Each CTA mentions 972-284-9713 and links to /#offer
 
-Return ONLY valid JSON (no markdown, no backticks):
+JSON format:
 {{
   "meta_title": "...",
   "meta_description": "...",
   "h1": "...",
-  "intro": "...(2-3 sentence intro)...",
-  "content_html": "...(HTML using only h2, h3, p, ul, ol, li tags)...",
-  "word_count": 0,
-  "secondary_keywords": ["...", "...", "..."]
+  "intro": "2-3 sentences max",
+  "content_html": "<h2>Section 1</h2><p>Content here. No apostrophes.</p><h2>Section 2</h2><p>More content.</p><h2>Section 3</h2><p>Final section.</p>",
+  "word_count": 900,
+  "secondary_keywords": ["keyword1", "keyword2", "keyword3"]
 }}"""
 
     prompt_safe = prompt.encode('ascii', errors='replace').decode('ascii')
 
-    # Retry up to 3 times on overload
     for attempt in range(3):
         try:
             message = client.messages.create(
                 model="claude-sonnet-4-5",
-                max_tokens=6000,
+                max_tokens=4000,
                 messages=[{"role": "user", "content": prompt_safe}]
             )
             break
@@ -190,15 +185,27 @@ Return ONLY valid JSON (no markdown, no backticks):
     try:
         return json.loads(clean_json(raw))
     except json.JSONDecodeError:
-        print("JSON parse failed - retrying with shorter word count...")
-        prompt_short = prompt_safe.replace('1,200-1,500 words', '700-900 words')
-        message2 = client.messages.create(
+        print("JSON parse failed - retrying with minimal prompt...")
+        prompt_minimal = f"""Write a real estate blog post for Top DFW House Buyers about: {topic['title']}
+
+Return ONLY this JSON with no apostrophes in content_html:
+{{
+  "meta_title": "Sell Your House Fast in DFW - Cash Offer",
+  "meta_description": "Top DFW House Buyers offers fast cash offers with no fees or repairs. Call 972-284-9713.",
+  "h1": "{topic['title']}",
+  "intro": "Selling your home in DFW does not have to be stressful. Top DFW House Buyers makes it simple with a fair cash offer in 24 hours.",
+  "content_html": "<h2>How We Buy Houses in DFW</h2><p>We buy houses throughout Dallas-Fort Worth in any condition. No repairs needed, no agent fees, no closing costs. Call us at 972-284-9713 or fill out our form to get started.</p><h2>Why DFW Homeowners Choose Us</h2><p>We close in as few as 7 days on your schedule. Our process is simple: tell us about your property, get a cash offer in 24 hours, and choose your closing date.</p><h2>Get Your Free Cash Offer Today</h2><p>Ready to sell your DFW home fast? Call 972-284-9713 or visit topdfwhousebuyers.com. We serve Plano, Frisco, Allen, McKinney, Richardson and all DFW cities.</p>",
+  "word_count": 150,
+  "secondary_keywords": ["sell house fast DFW", "cash home buyers Dallas", "we buy houses Texas"]
+}}"""
+        prompt_minimal_safe = prompt_minimal.encode('ascii', errors='replace').decode('ascii')
+        message3 = client.messages.create(
             model="claude-sonnet-4-5",
-            max_tokens=4000,
-            messages=[{"role": "user", "content": prompt_short}]
+            max_tokens=2000,
+            messages=[{"role": "user", "content": prompt_minimal_safe}]
         )
-        raw2 = message2.content[0].text.strip()
-        return json.loads(clean_json(raw2))
+        raw3 = message3.content[0].text.strip()
+        return json.loads(clean_json(raw3))
 
 
 def build_html_page(post: dict, topic: dict) -> str:
@@ -320,17 +327,17 @@ footer a{{color:#4ab840;text-decoration:none}}
 
 <div class="content-layout">
   <div class="article-body">
-    <a href="/blog/" class="back-link">← Back to All Articles</a>
+    <a href="/blog/" class="back-link">Back to All Articles</a>
     <p style="font-size:16px;line-height:1.9;color:#2a3a2a;margin-bottom:24px;font-weight:400">{post['intro']}</p>
     {post['content_html']}
     <div class="cta-inline" style="margin-top:40px">
       <h3>Ready to Get Your Cash Offer?</h3>
       <p>We buy houses anywhere in DFW - any condition, any situation. No fees, no repairs, no commissions. Get a fair cash offer within 24 hours.</p>
-      <a href="/#offer">Get My Free Cash Offer →</a>
+      <a href="/#offer">Get My Free Cash Offer</a>
     </div>
     <div class="review-cta">
-      <p>Happy with your experience? We'd love a Google review — it helps other DFW homeowners find us.</p>
-      <a href="https://share.google/vGlYZ46PBCsE6BPhz" target="_blank" rel="noopener">⭐ Leave Us a Google Review</a>
+      <p>Happy with your experience? We would love a Google review.</p>
+      <a href="https://share.google/vGlYZ46PBCsE6BPhz" target="_blank" rel="noopener">Leave Us a Google Review</a>
     </div>
   </div>
 
@@ -339,7 +346,7 @@ footer a{{color:#4ab840;text-decoration:none}}
       <h3>Get Your Free Cash Offer</h3>
       <p>No fees, no repairs. Close in 7 days or on your schedule.</p>
       <a href="tel:9722849713" class="sidebar-phone">972-284-9713</a>
-      <a href="/#offer" class="sidebar-btn green">Get Cash Offer →</a>
+      <a href="/#offer" class="sidebar-btn green">Get Cash Offer</a>
       <a href="tel:9722849713" class="sidebar-btn">Call Us Now</a>
     </div>
     <div class="sidebar-card">
@@ -353,16 +360,17 @@ footer a{{color:#4ab840;text-decoration:none}}
     </div>
     <div class="sidebar-card">
       <h3>Happy With Your Sale?</h3>
-      <p style="font-size:12px;color:#52675f;line-height:1.6;margin-bottom:12px">Leave us a Google review — helps other DFW homeowners find us.</p>
-      <a href="https://share.google/vGlYZ46PBCsE6BPhz" target="_blank" rel="noopener" style="display:block;background:#4ab840;color:#fff;padding:10px;font-weight:700;font-size:11px;text-decoration:none;border-radius:2px;letter-spacing:0.06em;text-transform:uppercase;text-align:center">⭐ Leave a Google Review</a>
+      <p style="font-size:12px;color:#52675f;line-height:1.6;margin-bottom:12px">Leave us a Google review.</p>
+      <a href="https://share.google/vGlYZ46PBCsE6BPhz" target="_blank" rel="noopener" style="display:block;background:#4ab840;color:#fff;padding:10px;font-weight:700;font-size:11px;text-decoration:none;border-radius:2px;letter-spacing:0.06em;text-transform:uppercase;text-align:center">Leave a Google Review</a>
     </div>
   </div>
 </div>
 
 <footer>
-  © {year} Top DFW House Buyers · <a href="/">topdfwhousebuyers.com</a> · 972-284-9713 · TX License #0657354<br>
+  {year} Top DFW House Buyers · <a href="/">topdfwhousebuyers.com</a> · 972-284-9713 · TX License #0657354<br>
   Serving Plano, Frisco, Allen, McKinney, Richardson, The Colony, Lewisville, Flower Mound, Keller, Grapevine, Colleyville, Southlake and all DFW cities<br><br>
-  <a href="https://share.google/vGlYZ46PBCsE6BPhz" target="_blank" rel="noopener" style="color:#4ab840">⭐ Leave us a Google Review</a> &nbsp;·&nbsp;
+  <a href="https://share.google/vGlYZ46PBCsE6BPhz" target="_blank" rel="noopener" style="color:#4ab840">Leave us a Google Review</a>
+  &nbsp;·&nbsp;
   <a href="https://www.facebook.com/TopDFWHouseBuyers/" target="_blank" rel="noopener" style="color:#4ab840">Facebook</a>
 </footer>
 
