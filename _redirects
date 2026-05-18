@@ -17,26 +17,3 @@
 
 # Old blog posts
 /blog/equity-when-buying-or-selling-a-house/    /blog/      301
-
-# City pages without trailing slash -> with trailing slash
-/plano          /plano/         301
-/frisco         /frisco/        301
-/allen          /allen/         301
-/richardson     /richardson/    301
-/mckinney       /mckinney/      301
-/keller         /keller/        301
-/southlake      /southlake/     301
-/grapevine      /grapevine/     301
-/celina         /celina/        301
-/carrollton     /carrollton/    301
-/euless         /euless/        301
-/arlington      /arlington/     301
-/hurst          /hurst/         301
-/mesquite       /mesquite/      301
-/garland        /garland/       301
-/grand-prairie  /grand-prairie/ 301
-/prosper        /prosper/       301
-/lewisville     /lewisville/    301
-/coppell        /coppell/       301
-/the-colony     /the-colony/    301
-/bedford        /bedford/       301
