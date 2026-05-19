@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Top DFW House Buyers — City Landing Page Generator
-Generates dedicated SEO landing pages for each target city
-Run once: python scripts/generate_cities.py
+Top DFW House Buyers — City Landing Page Generator (UPDATED)
+Generates ONLY the NEW/MISSING city pages not yet in the repo.
+Run: python scripts/generate_cities_dfw_updated.py
 """
 
 import os
@@ -12,29 +12,41 @@ import anthropic
 from datetime import datetime
 from pathlib import Path
 
+# ── ONLY THE NEW CITIES MISSING FROM THE SITE ──────────────────────────────
 CITIES = [
-    {"name": "Plano", "county": "Collin", "zip": "75023", "pop": "285,000", "notes": "one of the safest and most affluent cities in Texas"},
-    {"name": "Frisco", "county": "Collin", "zip": "75034", "pop": "200,000", "notes": "one of the fastest-growing cities in the US"},
-    {"name": "Allen", "county": "Collin", "zip": "75002", "pop": "105,000", "notes": "a thriving suburb known for top-rated schools"},
-    {"name": "Richardson", "county": "Dallas", "zip": "75080", "pop": "120,000", "notes": "home to the Telecom Corridor and UT Dallas"},
-    {"name": "The Colony", "county": "Denton", "zip": "75056", "pop": "42,000", "notes": "a lakeside community on Lewisville Lake"},
-    {"name": "Prosper", "county": "Collin", "zip": "75078", "pop": "35,000", "notes": "one of the fastest-growing towns in North Texas"},
-    {"name": "Lewisville", "county": "Denton", "zip": "75067", "pop": "110,000", "notes": "a diverse city with easy access to DFW airport"},
-    {"name": "Carrollton", "county": "Dallas", "zip": "75006", "pop": "135,000", "notes": "a well-established suburb with strong community ties"},
-    {"name": "Coppell", "county": "Dallas", "zip": "75019", "pop": "42,000", "notes": "an upscale community known for excellent schools"},
-    {"name": "Celina", "county": "Collin", "zip": "75009", "pop": "30,000", "notes": "a rapidly growing small town in Collin County"},
-    {"name": "McKinney", "county": "Collin", "zip": "75069", "pop": "200,000", "notes": "consistently rated one of the best places to live in America"},
-    {"name": "Hurst", "county": "Tarrant", "zip": "76053", "pop": "40,000", "notes": "a Mid-Cities community conveniently located near DFW airport"},
-    {"name": "Euless", "county": "Tarrant", "zip": "76039", "pop": "55,000", "notes": "a diverse Mid-Cities community in the heart of DFW"},
-    {"name": "Bedford", "county": "Tarrant", "zip": "76021", "pop": "50,000", "notes": "a family-friendly Mid-Cities community"},
-    {"name": "Arlington", "county": "Tarrant", "zip": "76010", "pop": "395,000", "notes": "home to the Dallas Cowboys and Texas Rangers"},
-    {"name": "Grand Prairie", "county": "Dallas", "zip": "75050", "pop": "195,000", "notes": "a diverse city between Dallas and Fort Worth"},
-    {"name": "Garland", "county": "Dallas", "zip": "75040", "pop": "240,000", "notes": "a large suburban city east of Dallas"},
-    {"name": "Mesquite", "county": "Dallas", "zip": "75149", "pop": "145,000", "notes": "a working-class suburb southeast of Dallas"},
-    {"name": "Keller", "county": "Tarrant", "zip": "76248", "pop": "48,000", "notes": "an affluent suburb in Tarrant County known for top schools"},
-    {"name": "Southlake", "county": "Tarrant", "zip": "76092", "pop": "32,000", "notes": "one of the wealthiest cities in Texas with luxury homes"},
-    {"name": "Grapevine", "county": "Tarrant", "zip": "76051", "pop": "55,000", "notes": "a historic city known for its wine country and Main Street"},
+    {"name": "Colleyville",     "county": "Tarrant", "zip": "76034", "pop": "27,000",  "notes": "an upscale suburban community known for large lots and top-rated schools"},
+    {"name": "DeSoto",          "county": "Dallas",  "zip": "75115", "pop": "57,000",  "notes": "a growing suburb south of Dallas with a strong sense of community"},
+    {"name": "Duncanville",     "county": "Dallas",  "zip": "75116", "pop": "40,000",  "notes": "an established southwest Dallas suburb with affordable housing"},
+    {"name": "Cedar Hill",      "county": "Dallas",  "zip": "75104", "pop": "48,000",  "notes": "a scenic city on the Escarpment offering beautiful views and parks"},
+    {"name": "Lancaster",       "county": "Dallas",  "zip": "75146", "pop": "40,000",  "notes": "a rapidly growing south Dallas suburb with easy highway access"},
+    {"name": "Wylie",           "county": "Collin",  "zip": "75098", "pop": "60,000",  "notes": "a fast-growing community in Collin County with a charming historic downtown"},
+    {"name": "Little Elm",      "county": "Denton",  "zip": "75068", "pop": "55,000",  "notes": "a lakeside community on Lewisville Lake with booming residential growth"},
+    {"name": "Burleson",        "county": "Johnson", "zip": "76028", "pop": "52,000",  "notes": "a growing south Fort Worth suburb with a small-town feel and strong community"},
+    {"name": "Waxahachie",      "county": "Ellis",   "zip": "75165", "pop": "42,000",  "notes": "a historic city known as the Crape Myrtle Capital of Texas"},
+    {"name": "Midlothian",      "county": "Ellis",   "zip": "76065", "pop": "35,000",  "notes": "one of the fastest-growing cities in Ellis County with new master-planned communities"},
+    {"name": "Rockwall",        "county": "Rockwall","zip": "75087", "pop": "55,000",  "notes": "a lakeside city on Lake Ray Hubbard east of Dallas with a scenic waterfront"},
+    {"name": "Farmers Branch",  "county": "Dallas",  "zip": "75234", "pop": "40,000",  "notes": "a centrally located inner suburb of Dallas with easy LBJ Freeway access"},
+    {"name": "North Richland Hills", "county": "Tarrant", "zip": "76180", "pop": "70,000", "notes": "a Mid-Cities hub in Tarrant County with convenient access to DFW Airport"},
+    {"name": "Mansfield",       "county": "Tarrant", "zip": "76063", "pop": "75,000",  "notes": "a growing suburban city south of Fort Worth known for excellent schools"},
+    {"name": "Rowlett",         "county": "Dallas",  "zip": "75088", "pop": "65,000",  "notes": "a lakeside community on Lake Ray Hubbard with a strong residential base"},
+    {"name": "Irving",          "county": "Dallas",  "zip": "75038", "pop": "255,000", "notes": "home to Fortune 500 headquarters and the Las Colinas urban center"},
+    {"name": "Denton",          "county": "Denton",  "zip": "76201", "pop": "150,000", "notes": "a vibrant college town home to UNT and TWU with a thriving arts scene"},
+    {"name": "Dallas",          "county": "Dallas",  "zip": "75201", "pop": "1,300,000","notes": "the 9th largest city in the US and the economic hub of North Texas"},
+    {"name": "Fort Worth",      "county": "Tarrant", "zip": "76102", "pop": "1,028,000","notes": "the 10th largest US city known as Cowtown with world-class museums and culture"},
+    {"name": "Celina",          "county": "Collin",  "zip": "75009", "pop": "64,000",  "notes": "the fastest-growing city in America in 2025 with explosive new development"},
 ]
+
+# ── FULL CITY LIST FOR THE CITIES STRIP (existing + new) ───────────────────
+ALL_CITIES_STRIP = [
+    "Plano", "Frisco", "Allen", "Richardson", "McKinney", "The Colony", "Prosper",
+    "Lewisville", "Carrollton", "Coppell", "Celina", "Hurst", "Euless", "Bedford",
+    "Arlington", "Grand Prairie", "Garland", "Mesquite", "Keller", "Southlake",
+    "Grapevine", "Colleyville", "DeSoto", "Duncanville", "Cedar Hill", "Lancaster",
+    "Wylie", "Little Elm", "Burleson", "Waxahachie", "Midlothian", "Rockwall",
+    "Farmers Branch", "North Richland Hills", "Mansfield", "Rowlett", "Irving",
+    "Denton", "Dallas", "Fort Worth",
+]
+
 
 def generate_city_content(city: dict) -> dict:
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
@@ -91,11 +103,25 @@ Return ONLY valid JSON (no markdown, no backticks):
     return json.loads(raw)
 
 
+def build_cities_strip(current_city_name: str) -> str:
+    pills = []
+    for city_name in ALL_CITIES_STRIP:
+        slug = city_name.lower().replace(' ', '-')
+        active = ' active' if city_name == current_city_name else ''
+        pills.append(f'<a href="/{slug}/" class="city-pill{active}">{city_name}</a>')
+    return '\n    '.join(pills)
+
+
 def build_city_page(content: dict, city: dict) -> str:
     slug = city['name'].lower().replace(' ', '-')
     year = datetime.now().year
 
-    why_points = ''.join([f'<li style="font-size:15px;line-height:1.8;color:#3a4a3a;margin:8px 0">{p}</li>' for p in content.get('why_sellers_points', [])])
+    why_points = ''.join([
+        f'<li style="font-size:15px;line-height:1.8;color:#3a4a3a;margin:8px 0">{p}</li>'
+        for p in content.get('why_sellers_points', [])
+    ])
+
+    cities_strip_html = build_cities_strip(city['name'])
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -246,7 +272,7 @@ body{{background:var(--cream);color:#1a1f1a;font-family:'Montserrat',sans-serif;
 .sidebar-btn.green{{background:#4ab840}}
 .cities-strip{{background:#1a1f1a;padding:40px}}
 .cities-strip h2{{font-family:'Playfair Display',serif;font-size:24px;color:#fff;margin-bottom:24px;text-align:center}}
-.cities-grid{{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:900px;margin:0 auto}}
+.cities-grid{{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:1000px;margin:0 auto}}
 @media(max-width:640px){{.cities-grid{{grid-template-columns:repeat(3,1fr)}}}}
 .city-pill{{padding:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);font-size:11px;font-weight:600;text-decoration:none;text-align:center;transition:all .15s;border-radius:2px;display:block}}
 .city-pill:hover{{background:#4ab840;color:#fff;border-color:#4ab840}}
@@ -385,27 +411,7 @@ footer a{{color:#4ab840;text-decoration:none}}
 <div class="cities-strip">
   <h2>We Buy Houses Across All of DFW</h2>
   <div class="cities-grid">
-    <a href="/plano/" class="city-pill{'active' if city['name'] == 'Plano' else ''}">Plano</a>
-    <a href="/frisco/" class="city-pill{'active' if city['name'] == 'Frisco' else ''}">Frisco</a>
-    <a href="/allen/" class="city-pill{'active' if city['name'] == 'Allen' else ''}">Allen</a>
-    <a href="/richardson/" class="city-pill{'active' if city['name'] == 'Richardson' else ''}">Richardson</a>
-    <a href="/mckinney/" class="city-pill{'active' if city['name'] == 'McKinney' else ''}">McKinney</a>
-    <a href="/the-colony/" class="city-pill{'active' if city['name'] == 'The Colony' else ''}">The Colony</a>
-    <a href="/prosper/" class="city-pill{'active' if city['name'] == 'Prosper' else ''}">Prosper</a>
-    <a href="/lewisville/" class="city-pill{'active' if city['name'] == 'Lewisville' else ''}">Lewisville</a>
-    <a href="/carrollton/" class="city-pill{'active' if city['name'] == 'Carrollton' else ''}">Carrollton</a>
-    <a href="/coppell/" class="city-pill{'active' if city['name'] == 'Coppell' else ''}">Coppell</a>
-    <a href="/celina/" class="city-pill{'active' if city['name'] == 'Celina' else ''}">Celina</a>
-    <a href="/hurst/" class="city-pill{'active' if city['name'] == 'Hurst' else ''}">Hurst</a>
-    <a href="/euless/" class="city-pill{'active' if city['name'] == 'Euless' else ''}">Euless</a>
-    <a href="/bedford/" class="city-pill{'active' if city['name'] == 'Bedford' else ''}">Bedford</a>
-    <a href="/arlington/" class="city-pill{'active' if city['name'] == 'Arlington' else ''}">Arlington</a>
-    <a href="/grand-prairie/" class="city-pill{'active' if city['name'] == 'Grand Prairie' else ''}">Grand Prairie</a>
-    <a href="/garland/" class="city-pill{'active' if city['name'] == 'Garland' else ''}">Garland</a>
-    <a href="/mesquite/" class="city-pill{'active' if city['name'] == 'Mesquite' else ''}">Mesquite</a>
-    <a href="/keller/" class="city-pill{'active' if city['name'] == 'Keller' else ''}">Keller</a>
-    <a href="/southlake/" class="city-pill{'active' if city['name'] == 'Southlake' else ''}">Southlake</a>
-    <a href="/grapevine/" class="city-pill{'active' if city['name'] == 'Grapevine' else ''}">Grapevine</a>
+    {cities_strip_html}
   </div>
 </div>
 
@@ -423,8 +429,6 @@ footer a{{color:#4ab840;text-decoration:none}}
 async function submitForm(e) {{
   e.preventDefault();
   const form = document.getElementById('city-form');
-  const name = document.getElementById('fname').value;
-  const phone = document.getElementById('phone').value;
   const btn = form.querySelector('.submit-btn');
   btn.textContent = 'Submitting...';
   btn.disabled = true;
@@ -445,15 +449,14 @@ async function submitForm(e) {{
 
 
 def main():
-    print(f"Generating city landing pages — {datetime.now().isoformat()}")
-    print(f"Total cities: {len(CITIES)}")
+    print(f"Generating MISSING DFW city landing pages — {datetime.now().isoformat()}")
+    print(f"Total new cities: {len(CITIES)}")
+    print()
 
     for i, city in enumerate(CITIES):
         slug = city['name'].lower().replace(' ', '-')
         output_dir = Path(slug)
         output_file = output_dir / "index.html"
-
-      
 
         print(f"  [{i+1}/{len(CITIES)}] Generating {city['name']}...")
         try:
@@ -462,15 +465,17 @@ def main():
             output_dir.mkdir(parents=True, exist_ok=True)
             with open(output_file, "w", encoding="utf-8") as f:
                 f.write(html)
-            print(f"    ✓ Saved to {output_file}")
+            print(f"    ✓ Saved → {output_file}")
         except Exception as e:
-            print(f"    ✗ Error: {e}")
+            print(f"    ✗ Error on {city['name']}: {e}")
 
-    print(f"\nDone! City pages generated.")
-    print("URLs will be live at:")
+    print()
+    print("Done! Upload these folders to your GitHub repo root:")
     for city in CITIES:
         slug = city['name'].lower().replace(' ', '-')
-        print(f"  topdfwhousebuyers.com/{slug}/")
+        print(f"  {slug}/")
+    print()
+    print("Then commit and Netlify will deploy automatically.")
 
 
 if __name__ == "__main__":
