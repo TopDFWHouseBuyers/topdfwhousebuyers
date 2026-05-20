@@ -1,0 +1,31 @@
+name: Generate Sitemap
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-sitemap:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate sitemap
+        run: python scripts/generate_sitemap.py
+
+      - name: Commit and push
+        run: |
+          git config --global user.name "Sitemap Bot"
+          git config --global user.email "bot@topdfwhousebuyers.com"
+          git add sitemap.xml
+          git diff --staged --quiet || git commit -m "Auto: Regenerated sitemap"
+          git push
