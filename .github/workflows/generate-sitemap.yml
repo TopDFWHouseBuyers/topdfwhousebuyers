@@ -3,6 +3,9 @@ name: Generate Sitemap
 on:
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   generate-sitemap:
     runs-on: ubuntu-latest
