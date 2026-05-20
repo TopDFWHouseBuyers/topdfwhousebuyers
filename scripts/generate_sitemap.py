@@ -1,60 +1,70 @@
 #!/usr/bin/env python3
 """
-Generates sitemap.xml for topdfwhousebuyers.com
-Runs automatically after each blog post or city page is generated
+Top DFW House Buyers — Sitemap Generator
+Auto-detects all city folders dynamically — no hardcoded list needed.
+Run: python scripts/generate_sitemap.py
 """
-
 from pathlib import Path
 from datetime import datetime
 
 BASE_URL = "https://www.topdfwhousebuyers.com"
 
-CITY_SLUGS = [
-    "plano","frisco","allen","richardson","the-colony","prosper",
-    "lewisville","carrollton","coppell","celina","mckinney","hurst",
-    "euless","bedford","arlington","grand-prairie","garland","mesquite",
-    "keller","southlake","grapevine"
-]
+# Pages to exclude from city auto-detection
+EXCLUDED_DIRS = {
+    "blog", "scripts", ".github", "node_modules",
+    ".git", "assets", "images", "css", "js"
+}
 
 def generate_sitemap():
     urls = []
     today = datetime.now().strftime("%Y-%m-%d")
 
-    # Main pages
-    static_pages = [
-        {"loc": "/", "priority": "1.0", "changefreq": "weekly"},
-        {"loc": "/blog/", "priority": "0.9", "changefreq": "daily"},
-    ]
-    for page in static_pages:
-        urls.append(f"""  <url>
-    <loc>{BASE_URL}{page["loc"]}</loc>
+    # ── Home page ──────────────────────────────────────────────────────────
+    urls.append(f"""  <url>
+    <loc>{BASE_URL}/</loc>
     <lastmod>{today}</lastmod>
-    <changefreq>{page["changefreq"]}</changefreq>
-    <priority>{page["priority"]}</priority>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>""")
 
-    # City pages
-    for slug in CITY_SLUGS:
-        city_file = Path(f"{slug}/index.html")
-        if city_file.exists():
-            mod_date = datetime.fromtimestamp(city_file.stat().st_mtime).strftime("%Y-%m-%d")
-            urls.append(f"""  <url>
-    <loc>{BASE_URL}/{slug}/</loc>
+    # ── Blog index ─────────────────────────────────────────────────────────
+    urls.append(f"""  <url>
+    <loc>{BASE_URL}/blog/</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>""")
+
+    # ── City pages — auto-detected ─────────────────────────────────────────
+    root = Path(".")
+    city_dirs = sorted([
+        d for d in root.iterdir()
+        if d.is_dir()
+        and d.name not in EXCLUDED_DIRS
+        and not d.name.startswith(".")
+        and (d / "index.html").exists()
+    ])
+
+    for city_dir in city_dirs:
+        city_file = city_dir / "index.html"
+        mod_date = datetime.fromtimestamp(city_file.stat().st_mtime).strftime("%Y-%m-%d")
+        urls.append(f"""  <url>
+    <loc>{BASE_URL}/{city_dir.name}/</loc>
     <lastmod>{mod_date}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>""")
 
-    # Blog posts
+    # ── Blog posts — auto-detected ─────────────────────────────────────────
     blog_dir = Path("blog")
     if blog_dir.exists():
         for post_dir in sorted(blog_dir.iterdir()):
             if post_dir.is_dir() and (post_dir / "index.html").exists():
-                slug = post_dir.name
-                mod_time = (post_dir / "index.html").stat().st_mtime
-                mod_date = datetime.fromtimestamp(mod_time).strftime("%Y-%m-%d")
+                mod_date = datetime.fromtimestamp(
+                    (post_dir / "index.html").stat().st_mtime
+                ).strftime("%Y-%m-%d")
                 urls.append(f"""  <url>
-    <loc>{BASE_URL}/blog/{slug}/</loc>
+    <loc>{BASE_URL}/blog/{post_dir.name}/</loc>
     <lastmod>{mod_date}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -68,8 +78,8 @@ def generate_sitemap():
     with open("sitemap.xml", "w") as f:
         f.write(sitemap)
 
-    print(f"Sitemap generated with {len(urls)} URLs")
-    print("Saved: sitemap.xml")
+    print(f"Sitemap generated: {len(urls)} URLs")
+    print(f"  - City pages: {len(city_dirs)}")
 
 if __name__ == "__main__":
     generate_sitemap()
