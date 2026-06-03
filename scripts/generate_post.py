@@ -14,14 +14,23 @@ from datetime import datetime
 from pathlib import Path
 
 CITIES = [
+    # Collin County
     "Plano", "Frisco", "Allen", "Richardson", "McKinney",
-    "The Colony", "Prosper", "Lewisville", "Flower Mound", "Keller",
-    "Grapevine", "Colleyville", "Southlake", "North Richland Hills",
-    "Arlington", "Garland", "Mesquite", "Grand Prairie", "Carrollton",
-    "Euless", "Hurst", "Bedford", "Coppell", "Celina",
-    "Forney", "Rockwall", "Rowlett", "Wylie", "Sachse",
-    "Fate", "Royse City", "Little Elm", "Aubrey", "Denton",
-    "Irving", "Farmers Branch", "Duncanville", "DeSoto", "Cedar Hill",
+    "The Colony", "Prosper", "Celina", "Wylie", "Sachse",
+    # Denton County
+    "Lewisville", "Flower Mound", "Denton", "Little Elm", "Coppell",
+    # Tarrant County
+    "Fort Worth", "Arlington", "Keller", "Grapevine", "Colleyville",
+    "Southlake", "North Richland Hills", "Hurst", "Euless", "Bedford",
+    "Mansfield", "Burleson",
+    # Dallas County
+    "Dallas", "Garland", "Irving", "Grand Prairie", "Mesquite",
+    "Carrollton", "Farmers Branch", "Rowlett", "DeSoto", "Duncanville",
+    "Cedar Hill", "Lancaster",
+    # Rockwall / Ellis / Johnson
+    "Rockwall", "Waxahachie", "Midlothian",
+    # Other
+    "Forney", "Fate", "Royse City", "Aubrey",
 ]
 
 CITY_TOPICS = [
@@ -66,10 +75,15 @@ EVERGREEN_TOPICS = [
     {"title": "Selling a Rental Property in Texas", "slug": "selling-rental-property-texas", "keyword": "selling rental property Texas", "category": "situations"},
     {"title": "How to Sell Your Texas Home When Relocating", "slug": "sell-home-relocating-texas", "keyword": "sell home relocating Texas", "category": "situations"},
     {"title": "Selling a House With Code Violations in Texas", "slug": "selling-house-code-violations-texas", "keyword": "selling house code violations Texas", "category": "situations"},
-    {"title": "DFW Real Estate Market 2025 - What Sellers Need to Know", "slug": "dfw-real-estate-market-2025", "keyword": "DFW real estate market 2025", "category": "market"},
-    {"title": "Is Now a Good Time to Sell Your DFW Home?", "slug": "good-time-sell-dfw-home", "keyword": "good time sell DFW home", "category": "market"},
-    {"title": "North Texas Home Prices - What Sellers Need to Know", "slug": "north-texas-home-prices-sellers", "keyword": "North Texas home prices sellers", "category": "market"},
-    {"title": "Why DFW Cash Home Sales Are Rising in 2025", "slug": "dfw-cash-home-sales-rising-2025", "keyword": "DFW cash home sales 2025", "category": "market"},
+    {"title": "DFW Real Estate Market 2026 - What Sellers Need to Know", "slug": "dfw-real-estate-market-2026", "keyword": "DFW real estate market 2026", "category": "market"},
+    {"title": "Is Now a Good Time to Sell Your DFW Home in 2026?", "slug": "good-time-sell-dfw-home-2026", "keyword": "good time sell DFW home 2026", "category": "market"},
+    {"title": "North Texas Home Prices 2026 - What Sellers Need to Know", "slug": "north-texas-home-prices-2026", "keyword": "North Texas home prices 2026", "category": "market"},
+    {"title": "Why DFW Cash Home Sales Are Rising in 2026", "slug": "dfw-cash-home-sales-rising-2026", "keyword": "DFW cash home sales 2026", "category": "market"},
+    {"title": "Celina TX Real Estate 2026 - Fastest Growing City in America", "slug": "celina-tx-real-estate-2026", "keyword": "Celina TX real estate 2026", "category": "market"},
+    {"title": "Selling Your Home in a HOA Community in DFW", "slug": "selling-home-hoa-community-dfw", "keyword": "selling home HOA DFW", "category": "situations"},
+    {"title": "How to Sell a House With Back Taxes in Texas", "slug": "sell-house-back-taxes-texas", "keyword": "sell house back taxes Texas", "category": "situations"},
+    {"title": "Selling a House in Probate in Texas - Complete Guide", "slug": "selling-house-probate-texas", "keyword": "selling house probate Texas", "category": "inheritance"},
+    {"title": "What DFW Homeowners Need to Know About Cash Buyers in 2026", "slug": "dfw-homeowners-cash-buyers-2026", "keyword": "DFW cash buyers 2026", "category": "education"},
 ]
 
 
