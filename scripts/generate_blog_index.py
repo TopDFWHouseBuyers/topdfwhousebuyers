@@ -2,16 +2,17 @@
 """
 Top DFW House Buyers - Blog Index Generator
 Auto-scans all blog post folders and rebuilds the blog index page.
+Extracts publish date from Article schema JSON inside each post.
 Run: python scripts/generate_blog_index.py
 """
 
 import re
+import json
 from pathlib import Path
 from datetime import datetime
 
 
 def get_post_meta(post_dir: Path) -> dict | None:
-    """Extract title and description from a blog post's index.html."""
     index_file = post_dir / "index.html"
     if not index_file.exists():
         return None
@@ -21,7 +22,6 @@ def get_post_meta(post_dir: Path) -> dict | None:
     # Extract title
     title_match = re.search(r'<title>(.*?)</title>', content)
     title = title_match.group(1).strip() if title_match else post_dir.name.replace("-", " ").title()
-    # Clean site name suffix
     title = re.sub(r'\s*[\|·—]\s*Top DFW House Buyers.*$', '', title).strip()
     title = re.sub(r'\s*[\|·—]\s*topdfwhousebuyers.*$', '', title).strip()
 
@@ -29,9 +29,35 @@ def get_post_meta(post_dir: Path) -> dict | None:
     desc_match = re.search(r'<meta name="description" content="(.*?)"', content)
     description = desc_match.group(1).strip() if desc_match else "Expert guide for DFW homeowners."
 
-    # Extract H1
-    h1_match = re.search(r'<h1[^>]*>(.*?)</h1>', content, re.DOTALL)
-    h1 = re.sub(r'<[^>]+>', '', h1_match.group(1)).strip() if h1_match else title
+    # Extract publish date from Article schema JSON
+    pub_date = None
+    try:
+        schema_matches = re.findall(r'<script type="application/ld\+json">(.*?)</script>', content, re.DOTALL)
+        for schema_str in schema_matches:
+            schema_str_clean = schema_str.strip()
+            try:
+                schema = json.loads(schema_str_clean)
+                if schema.get('@type') == 'Article' and schema.get('datePublished'):
+                    date_str = schema['datePublished']
+                    # Parse ISO format date
+                    dt = datetime.fromisoformat(date_str.replace('Z', '+00:00'))
+                    pub_date = dt.strftime("%B %d, %Y")
+                    break
+            except (json.JSONDecodeError, ValueError):
+                continue
+    except Exception:
+        pass
+
+    # Fallback to hero-meta div date string
+    if not pub_date:
+        meta_match = re.search(r'class="hero-meta"[^>]*>Published ([^<·]+)', content)
+        if meta_match:
+            pub_date = meta_match.group(1).strip()
+
+    # Final fallback to file modified time
+    if not pub_date:
+        mod_time = index_file.stat().st_mtime
+        pub_date = datetime.fromtimestamp(mod_time).strftime("%B %d, %Y")
 
     # Detect category from slug
     slug = post_dir.name
@@ -57,19 +83,30 @@ def get_post_meta(post_dir: Path) -> dict | None:
         category = "Education"
         cat_color = "#16a085"
 
-    # Get file modified time as publish date
-    mod_time = index_file.stat().st_mtime
-    pub_date = datetime.fromtimestamp(mod_time).strftime("%B %d, %Y")
+    # Use schema date for sorting if available
+    try:
+        schema_matches = re.findall(r'<script type="application/ld\+json">(.*?)</script>', content, re.DOTALL)
+        sort_time = index_file.stat().st_mtime
+        for schema_str in schema_matches:
+            try:
+                schema = json.loads(schema_str.strip())
+                if schema.get('@type') == 'Article' and schema.get('datePublished'):
+                    dt = datetime.fromisoformat(schema['datePublished'].replace('Z', '+00:00'))
+                    sort_time = dt.timestamp()
+                    break
+            except Exception:
+                continue
+    except Exception:
+        sort_time = index_file.stat().st_mtime
 
     return {
         "slug": slug,
         "title": title,
-        "h1": h1,
         "description": description,
         "category": category,
         "cat_color": cat_color,
         "pub_date": pub_date,
-        "mod_time": mod_time,
+        "sort_time": sort_time,
     }
 
 
@@ -98,22 +135,9 @@ def build_blog_index(posts: list) -> str:
 <title>Blog — Top DFW House Buyers | Sell Your House Fast in DFW</title>
 <meta name="description" content="Expert guides for DFW homeowners — how to sell fast, avoid foreclosure, handle inherited properties, divorce sales, and more. Top DFW House Buyers.">
 <link rel="canonical" href="https://www.topdfwhousebuyers.com/blog/">
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QSBN8EDR9Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
-  gtag('config', 'G-QSBN8EDR9Z');
-</script>
-<!-- Microsoft Clarity -->
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){{
-        c[a]=c[a]||function(){{(c[a].q=c[a].q||[]).push(arguments)}};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    }})(window, document, "clarity", "script", "wiurnc9zu7");
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-QSBN8EDR9Z');</script>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){{c[a]=c[a]||function(){{(c[a].q=c[a].q||[]).push(arguments)}};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);}})(window,document,"clarity","script","wiurnc9zu7");</script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{{box-sizing:border-box;margin:0;padding:0}}
@@ -150,7 +174,6 @@ footer a{{color:#4ab840;text-decoration:none}}
 </style>
 </head>
 <body>
-
 <nav class="site-nav">
   <a href="/" class="nav-logo">Top DFW House Buyers</a>
   <div class="nav-links">
@@ -160,29 +183,24 @@ footer a{{color:#4ab840;text-decoration:none}}
     <a href="/#offer" class="nav-cta">Get Cash Offer</a>
   </div>
 </nav>
-
 <div class="blog-hero">
   <h1>Seller Resources &amp; Guides</h1>
   <p>Expert articles to help DFW homeowners navigate every situation — from foreclosure to inheritance to fast sales.</p>
   <div class="count">{total} Articles · Updated Regularly</div>
 </div>
-
 <div class="blog-wrap">
   <div class="posts-grid">
 {post_cards}
   </div>
-
   <div class="cta-band">
     <h2>Ready to Sell Your DFW Home?</h2>
     <p>Get a fair cash offer in 24 hours. No fees, no repairs, no commissions. Close in as few as 7 days.</p>
     <a href="/#offer">Get My Free Cash Offer →</a>
   </div>
 </div>
-
 <footer>
   © {year} Top DFW House Buyers · <a href="/">topdfwhousebuyers.com</a> · 972-284-9713 · TX License #0657354
 </footer>
-
 </body>
 </html>"""
 
@@ -193,18 +211,16 @@ def main():
         print("No blog directory found.")
         return
 
-    # Get all post directories sorted by modified time (newest first)
-    post_dirs = sorted(
-        [d for d in blog_dir.iterdir() if d.is_dir() and (d / "index.html").exists()],
-        key=lambda d: (d / "index.html").stat().st_mtime,
-        reverse=True
-    )
+    post_dirs = [d for d in blog_dir.iterdir() if d.is_dir() and (d / "index.html").exists()]
 
     posts = []
     for post_dir in post_dirs:
         meta = get_post_meta(post_dir)
         if meta:
             posts.append(meta)
+
+    # Sort by actual publish date, newest first
+    posts.sort(key=lambda x: x['sort_time'], reverse=True)
 
     print(f"Found {len(posts)} blog posts")
 
