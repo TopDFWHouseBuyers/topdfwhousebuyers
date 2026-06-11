@@ -1,6 +1,8 @@
 # Top DFW House Buyers — Netlify Redirects
+# NOTE: sell-my-house-fast-{city}-tx/ URLs are NOT redirected here
+# because they now have real landing pages
 
-# ── Old Carrot pages → new pages ──────────────────────────────────────────
+# ── Old Carrot pages ──────────────────────────────────────────────────────
 /testimonials/                                /                          301
 /contact-us/                                  /#offer                    301
 /contact-us                                   /#offer                    301
@@ -12,6 +14,29 @@
 /privacy/                                     /                          301
 /faq/                                         /                          301
 
+# ── Old Carrot city URLs → new clean city pages ───────────────────────────
+# (keyword landing pages like /sell-my-house-fast-celina-tx/ are NOT here
+#  because they now have real content pages)
+
+/sell-my-house-fast-grand-prairie-tx/         /grand-prairie/            301
+/sell-my-house-fast-irving-tx/                /irving/                   301
+/sell-my-house-fast-carrollton-tx/            /carrollton/               301
+/sell-my-house-fast-mesquite-tx/              /mesquite/                 301
+/sell-my-house-fast-richardson-tx/            /richardson/               301
+/sell-my-house-fast-arlington-tx/             /arlington/                301
+/sell-my-house-fast-aubrey/                   /#offer                    301
+/we-buy-houses-farmers-branch/                /farmers-branch/           301
+/we-buy-houses-flower-mound/                  /flower-mound/             301
+/we-buy-houses-saginaw/                       /#offer                    301
+/we-buy-houses-rowlett/                       /rowlett/                  301
+/we-buy-houses-watauga/                       /#offer                    301
+/we-buy-houses-mckinney/                      /mckinney/                 301
+/we-buy-houses-seagoville/                    /#offer                    301
+
+# ── Plano and Frisco without -tx suffix (old URLs) ────────────────────────
+/sell-my-house-fast-plano/                    /plano/                    301
+/sell-my-house-fast-frisco/                   /frisco/                   301
+
 # ── Old blog posts → blog index ───────────────────────────────────────────
 /blog/equity-when-buying-or-selling-a-house/                             /blog/  301
 /blog/asking-price-selling-your-house-fast-in-dallas-fort-worth/         /blog/  301
@@ -19,265 +44,5 @@
 /blog/tips-for-selling-a-townhouse-in-dallas/                            /blog/  301
 /blog/selling-your-house-sunrise/                                        /blog/  301
 
-# ── Old city URLs → new clean city pages ──────────────────────────────────
-
-# Plano
-/sell-my-house-fast-plano/                    /plano/                    301
-/sell-my-house-fast-plano-tx/                 /plano/                    301
-/we-buy-houses-plano/                         /plano/                    301
-/we-buy-houses-plano-tx/                      /plano/                    301
-
-# Frisco
-/sell-my-house-fast-frisco/                   /frisco/                   301
-/sell-my-house-fast-frisco-tx/                /frisco/                   301
-/we-buy-houses-frisco/                        /frisco/                   301
-/we-buy-houses-frisco-tx/                     /frisco/                   301
-
-# Allen
-/sell-my-house-fast-allen/                    /allen/                    301
-/sell-my-house-fast-allen-tx/                 /allen/                    301
-/we-buy-houses-allen/                         /allen/                    301
-/we-buy-houses-allen-tx/                      /allen/                    301
-
-# McKinney
-/sell-my-house-fast-mckinney/                 /mckinney/                 301
-/sell-my-house-fast-mckinney-tx/              /mckinney/                 301
-/we-buy-houses-mckinney/                      /mckinney/                 301
-/we-buy-houses-mckinney-tx/                   /mckinney/                 301
-
-# Richardson
-/sell-my-house-fast-richardson/               /richardson/               301
-/sell-my-house-fast-richardson-tx/            /richardson/               301
-/we-buy-houses-richardson/                    /richardson/               301
-/we-buy-houses-richardson-tx/                 /richardson/               301
-
-# The Colony
-/sell-my-house-fast-the-colony/               /the-colony/               301
-/sell-my-house-fast-the-colony-tx/            /the-colony/               301
-/we-buy-houses-the-colony/                    /the-colony/               301
-/we-buy-houses-the-colony-tx/                 /the-colony/               301
-
-# Lewisville
-/sell-my-house-fast-lewisville/               /lewisville/               301
-/sell-my-house-fast-lewisville-tx/            /lewisville/               301
-/we-buy-houses-lewisville/                    /lewisville/               301
-/we-buy-houses-lewisville-tx/                 /lewisville/               301
-
-# Flower Mound
-/sell-my-house-fast-flower-mound/             /flower-mound/             301
-/sell-my-house-fast-flower-mound-tx/          /flower-mound/             301
-/we-buy-houses-flower-mound/                  /flower-mound/             301
-/we-buy-houses-flower-mound-tx/               /flower-mound/             301
-
-# Carrollton
-/sell-my-house-fast-carrollton/               /carrollton/               301
-/sell-my-house-fast-carrollton-tx/            /carrollton/               301
-/we-buy-houses-carrollton/                    /carrollton/               301
-/we-buy-houses-carrollton-tx/                 /carrollton/               301
-
-# Garland
-/sell-my-house-fast-garland/                  /garland/                  301
-/sell-my-house-fast-garland-tx/               /garland/                  301
-/we-buy-houses-garland/                       /garland/                  301
-/we-buy-houses-garland-tx/                    /garland/                  301
-
-# Irving
-/sell-my-house-fast-irving/                   /irving/                   301
-/sell-my-house-fast-irving-tx/                /irving/                   301
-/we-buy-houses-irving/                        /irving/                   301
-/we-buy-houses-irving-tx/                     /irving/                   301
-
-# Grand Prairie
-/sell-my-house-fast-grand-prairie/            /grand-prairie/            301
-/sell-my-house-fast-grand-prairie-tx/         /grand-prairie/            301
-/we-buy-houses-grand-prairie/                 /grand-prairie/            301
-/we-buy-houses-grand-prairie-tx/              /grand-prairie/            301
-
-# Mesquite
-/sell-my-house-fast-mesquite/                 /mesquite/                 301
-/sell-my-house-fast-mesquite-tx/              /mesquite/                 301
-/we-buy-houses-mesquite/                      /mesquite/                 301
-/we-buy-houses-mesquite-tx/                   /mesquite/                 301
-
-# Arlington
-/sell-my-house-fast-arlington/                /arlington/                301
-/sell-my-house-fast-arlington-tx/             /arlington/                301
-/we-buy-houses-arlington/                     /arlington/                301
-/we-buy-houses-arlington-tx/                  /arlington/                301
-
-# Dallas
-/sell-my-house-fast-dallas/                   /dallas/                   301
-/sell-my-house-fast-dallas-tx/                /dallas/                   301
-/we-buy-houses-dallas/                        /dallas/                   301
-/we-buy-houses-dallas-tx/                     /dallas/                   301
-
-# Fort Worth
-/sell-my-house-fast-fort-worth/               /fort-worth/               301
-/sell-my-house-fast-fort-worth-tx/            /fort-worth/               301
-/we-buy-houses-fort-worth/                    /fort-worth/               301
-/we-buy-houses-fort-worth-tx/                 /fort-worth/               301
-
-# Keller
-/sell-my-house-fast-keller/                   /keller/                   301
-/sell-my-house-fast-keller-tx/                /keller/                   301
-/we-buy-houses-keller/                        /keller/                   301
-/we-buy-houses-keller-tx/                     /keller/                   301
-
-# Southlake
-/sell-my-house-fast-southlake/                /southlake/                301
-/sell-my-house-fast-southlake-tx/             /southlake/                301
-/we-buy-houses-southlake/                     /southlake/                301
-/we-buy-houses-southlake-tx/                  /southlake/                301
-
-# Grapevine
-/sell-my-house-fast-grapevine/                /grapevine/                301
-/sell-my-house-fast-grapevine-tx/             /grapevine/                301
-/we-buy-houses-grapevine/                     /grapevine/                301
-/we-buy-houses-grapevine-tx/                  /grapevine/                301
-
-# Colleyville
-/sell-my-house-fast-colleyville/              /colleyville/              301
-/sell-my-house-fast-colleyville-tx/           /colleyville/              301
-/we-buy-houses-colleyville/                   /colleyville/              301
-/we-buy-houses-colleyville-tx/                /colleyville/              301
-
-# Hurst
-/sell-my-house-fast-hurst/                    /hurst/                    301
-/sell-my-house-fast-hurst-tx/                 /hurst/                    301
-/we-buy-houses-hurst/                         /hurst/                    301
-/we-buy-houses-hurst-tx/                      /hurst/                    301
-
-# Euless
-/sell-my-house-fast-euless/                   /euless/                   301
-/sell-my-house-fast-euless-tx/                /euless/                   301
-/we-buy-houses-euless/                        /euless/                   301
-/we-buy-houses-euless-tx/                     /euless/                   301
-
-# Bedford
-/sell-my-house-fast-bedford/                  /bedford/                  301
-/sell-my-house-fast-bedford-tx/               /bedford/                  301
-/we-buy-houses-bedford/                       /bedford/                  301
-/we-buy-houses-bedford-tx/                    /bedford/                  301
-
-# North Richland Hills
-/sell-my-house-fast-north-richland-hills/     /north-richland-hills/     301
-/sell-my-house-fast-north-richland-hills-tx/  /north-richland-hills/     301
-/we-buy-houses-north-richland-hills/          /north-richland-hills/     301
-/we-buy-houses-north-richland-hills-tx/       /north-richland-hills/     301
-/we-buy-houses-richland-hills/                /north-richland-hills/     301
-
-# Coppell
-/sell-my-house-fast-coppell/                  /coppell/                  301
-/sell-my-house-fast-coppell-tx/               /coppell/                  301
-/we-buy-houses-coppell/                       /coppell/                  301
-/we-buy-houses-coppell-tx/                    /coppell/                  301
-
-# Prosper
-/sell-my-house-fast-prosper/                  /prosper/                  301
-/sell-my-house-fast-prosper-tx/               /prosper/                  301
-/we-buy-houses-prosper/                       /prosper/                  301
-/we-buy-houses-prosper-tx/                    /prosper/                  301
-
-# Denton
-/sell-my-house-fast-denton/                   /denton/                   301
-/sell-my-house-fast-denton-tx/                /denton/                   301
-/we-buy-houses-denton/                        /denton/                   301
-/we-buy-houses-denton-tx/                     /denton/                   301
-
-# Rowlett
-/sell-my-house-fast-rowlett/                  /rowlett/                  301
-/sell-my-house-fast-rowlett-tx/               /rowlett/                  301
-/we-buy-houses-rowlett/                       /rowlett/                  301
-/we-buy-houses-rowlett-tx/                    /rowlett/                  301
-
-# Farmers Branch
-/sell-my-house-fast-farmers-branch/           /farmers-branch/           301
-/sell-my-house-fast-farmers-branch-tx/        /farmers-branch/           301
-/we-buy-houses-farmers-branch/                /farmers-branch/           301
-/we-buy-houses-farmers-branch-tx/             /farmers-branch/           301
-
-# Mansfield
-/sell-my-house-fast-mansfield/                /mansfield/                301
-/sell-my-house-fast-mansfield-tx/             /mansfield/                301
-/we-buy-houses-mansfield/                     /mansfield/                301
-/we-buy-houses-mansfield-tx/                  /mansfield/                301
-
-# Cedar Hill
-/sell-my-house-fast-cedar-hill/               /cedar-hill/               301
-/sell-my-house-fast-cedar-hill-tx/            /cedar-hill/               301
-/we-buy-houses-cedar-hill/                    /cedar-hill/               301
-/we-buy-houses-cedar-hill-tx/                 /cedar-hill/               301
-
-# DeSoto
-/sell-my-house-fast-desoto/                   /desoto/                   301
-/sell-my-house-fast-desoto-tx/                /desoto/                   301
-/we-buy-houses-desoto/                        /desoto/                   301
-/we-buy-houses-desoto-tx/                     /desoto/                   301
-
-# Duncanville
-/sell-my-house-fast-duncanville/              /duncanville/              301
-/sell-my-house-fast-duncanville-tx/           /duncanville/              301
-/we-buy-houses-duncanville/                   /duncanville/              301
-/we-buy-houses-duncanville-tx/                /duncanville/              301
-
-# Lancaster
-/sell-my-house-fast-lancaster/                /lancaster/                301
-/sell-my-house-fast-lancaster-tx/             /lancaster/                301
-/we-buy-houses-lancaster/                     /lancaster/                301
-/we-buy-houses-lancaster-tx/                  /lancaster/                301
-
-# Burleson
-/sell-my-house-fast-burleson/                 /burleson/                 301
-/sell-my-house-fast-burleson-tx/              /burleson/                 301
-/we-buy-houses-burleson/                      /burleson/                 301
-/we-buy-houses-burleson-tx/                   /burleson/                 301
-
-# Rockwall
-/sell-my-house-fast-rockwall/                 /rockwall/                 301
-/sell-my-house-fast-rockwall-tx/              /rockwall/                 301
-/we-buy-houses-rockwall/                      /rockwall/                 301
-/we-buy-houses-rockwall-tx/                   /rockwall/                 301
-
-# Wylie
-/sell-my-house-fast-wylie/                    /wylie/                    301
-/sell-my-house-fast-wylie-tx/                 /wylie/                    301
-/we-buy-houses-wylie/                         /wylie/                    301
-/we-buy-houses-wylie-tx/                      /wylie/                    301
-
-# Little Elm
-/sell-my-house-fast-little-elm/               /little-elm/               301
-/sell-my-house-fast-little-elm-tx/            /little-elm/               301
-/we-buy-houses-little-elm/                    /little-elm/               301
-/we-buy-houses-little-elm-tx/                 /little-elm/               301
-
-# Waxahachie
-/sell-my-house-fast-waxahachie/               /waxahachie/               301
-/sell-my-house-fast-waxahachie-tx/            /waxahachie/               301
-/we-buy-houses-waxahachie/                    /waxahachie/               301
-/we-buy-houses-waxahachie-tx/                 /waxahachie/               301
-
-# Midlothian
-/sell-my-house-fast-midlothian/               /midlothian/               301
-/sell-my-house-fast-midlothian-tx/            /midlothian/               301
-/we-buy-houses-midlothian/                    /midlothian/               301
-/we-buy-houses-midlothian-tx/                 /midlothian/               301
-
-# Celina
-/sell-my-house-fast-celina/                   /celina/                   301
-/sell-my-house-fast-celina-tx/                /celina/                   301
-/we-buy-houses-celina/                        /celina/                   301
-/we-buy-houses-celina-tx/                     /celina/                   301
-
-# Saginaw (no new page — send to homepage offer)
-/we-buy-houses-saginaw/                       /#offer                    301
-
-# Watauga (no new page — send to homepage offer)
-/we-buy-houses-watauga/                       /#offer                    301
-
-# Seagoville (no new page — send to homepage offer)
-/we-buy-houses-seagoville/                    /#offer                    301
-
-# Aubrey (no new page — send to homepage offer)
-/sell-my-house-fast-aubrey/                   /#offer                    301
-
-/go/stop-foreclosure/    /blog/stop-foreclosure-texas/    301
+# ── Misc ──────────────────────────────────────────────────────────────────
+/go/stop-foreclosure/                         /blog/stop-foreclosure-texas/  301
