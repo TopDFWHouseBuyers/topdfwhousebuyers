@@ -14,23 +14,14 @@ from datetime import datetime
 from pathlib import Path
 
 CITIES = [
-    # Collin County
     "Plano", "Frisco", "Allen", "Richardson", "McKinney",
-    "The Colony", "Prosper", "Celina", "Wylie", "Sachse",
-    # Denton County
-    "Lewisville", "Flower Mound", "Denton", "Little Elm", "Coppell",
-    # Tarrant County
-    "Fort Worth", "Arlington", "Keller", "Grapevine", "Colleyville",
-    "Southlake", "North Richland Hills", "Hurst", "Euless", "Bedford",
-    "Mansfield", "Burleson",
-    # Dallas County
-    "Dallas", "Garland", "Irving", "Grand Prairie", "Mesquite",
-    "Carrollton", "Farmers Branch", "Rowlett", "DeSoto", "Duncanville",
-    "Cedar Hill", "Lancaster",
-    # Rockwall / Ellis / Johnson
-    "Rockwall", "Waxahachie", "Midlothian",
-    # Other
-    "Forney", "Fate", "Royse City", "Aubrey",
+    "The Colony", "Prosper", "Lewisville", "Flower Mound", "Keller",
+    "Grapevine", "Colleyville", "Southlake", "North Richland Hills",
+    "Arlington", "Garland", "Mesquite", "Grand Prairie", "Carrollton",
+    "Euless", "Hurst", "Bedford", "Coppell", "Celina",
+    "Forney", "Rockwall", "Rowlett", "Wylie", "Sachse",
+    "Fate", "Royse City", "Little Elm", "Aubrey", "Denton",
+    "Irving", "Farmers Branch", "Duncanville", "DeSoto", "Cedar Hill",
 ]
 
 CITY_TOPICS = [
@@ -65,6 +56,8 @@ EVERGREEN_TOPICS = [
     {"title": "Is It Better to Sell to a Cash Buyer or Agent in Texas?", "slug": "cash-buyer-vs-agent-texas", "keyword": "cash buyer vs agent Texas", "category": "education"},
     {"title": "How to Get a Fair Cash Offer on Your DFW Home", "slug": "fair-cash-offer-dfw-home", "keyword": "fair cash offer DFW home", "category": "education"},
     {"title": "What Happens at a Cash Home Sale Closing in Texas?", "slug": "cash-home-sale-closing-texas", "keyword": "cash home sale closing Texas", "category": "education"},
+    {"title": "Texas Capital Gains Tax When Selling Your Home", "slug": "texas-capital-gains-tax-selling-home", "keyword": "Texas capital gains tax selling home", "category": "education"},
+    {"title": "What DFW Homeowners Need to Know About Cash Buyers in 2026", "slug": "dfw-homeowners-cash-buyers-2026", "keyword": "DFW cash buyers 2026", "category": "education"},
     {"title": "Selling a House With Tenants in Texas - Landlord Guide", "slug": "selling-house-with-tenants-texas", "keyword": "selling house with tenants Texas", "category": "situations"},
     {"title": "Selling a Fire-Damaged Home in DFW", "slug": "sell-fire-damaged-home-dfw", "keyword": "sell fire damaged home DFW", "category": "situations"},
     {"title": "Selling a House With Foundation Problems in Texas", "slug": "selling-house-foundation-problems-texas", "keyword": "selling house foundation problems Texas", "category": "situations"},
@@ -72,18 +65,15 @@ EVERGREEN_TOPICS = [
     {"title": "Selling a House With Mold in Texas", "slug": "sell-house-mold-texas", "keyword": "sell house mold Texas", "category": "situations"},
     {"title": "How to Sell a House With a Lien in Texas", "slug": "sell-house-lien-texas", "keyword": "sell house lien Texas", "category": "situations"},
     {"title": "Downsizing in DFW - How to Sell Your Home Fast", "slug": "downsizing-dfw-sell-fast", "keyword": "downsizing DFW sell home", "category": "situations"},
-    {"title": "Selling a Rental Property in Texas", "slug": "selling-rental-property-texas", "keyword": "selling rental property Texas", "category": "situations"},
+    {"title": "Selling a Rental Property in Texas - Cash vs 1031", "slug": "selling-rental-property-texas", "keyword": "selling rental property Texas", "category": "situations"},
     {"title": "How to Sell Your Texas Home When Relocating", "slug": "sell-home-relocating-texas", "keyword": "sell home relocating Texas", "category": "situations"},
     {"title": "Selling a House With Code Violations in Texas", "slug": "selling-house-code-violations-texas", "keyword": "selling house code violations Texas", "category": "situations"},
+    {"title": "How to Sell a House With Back Taxes in Texas", "slug": "sell-house-back-taxes-texas", "keyword": "sell house back taxes Texas", "category": "situations"},
+    {"title": "Selling a House in an HOA Community in DFW", "slug": "selling-house-hoa-dfw", "keyword": "selling house HOA DFW", "category": "situations"},
     {"title": "DFW Real Estate Market 2026 - What Sellers Need to Know", "slug": "dfw-real-estate-market-2026", "keyword": "DFW real estate market 2026", "category": "market"},
     {"title": "Is Now a Good Time to Sell Your DFW Home in 2026?", "slug": "good-time-sell-dfw-home-2026", "keyword": "good time sell DFW home 2026", "category": "market"},
     {"title": "North Texas Home Prices 2026 - What Sellers Need to Know", "slug": "north-texas-home-prices-2026", "keyword": "North Texas home prices 2026", "category": "market"},
     {"title": "Why DFW Cash Home Sales Are Rising in 2026", "slug": "dfw-cash-home-sales-rising-2026", "keyword": "DFW cash home sales 2026", "category": "market"},
-    {"title": "Celina TX Real Estate 2026 - Fastest Growing City in America", "slug": "celina-tx-real-estate-2026", "keyword": "Celina TX real estate 2026", "category": "market"},
-    {"title": "Selling Your Home in a HOA Community in DFW", "slug": "selling-home-hoa-community-dfw", "keyword": "selling home HOA DFW", "category": "situations"},
-    {"title": "How to Sell a House With Back Taxes in Texas", "slug": "sell-house-back-taxes-texas", "keyword": "sell house back taxes Texas", "category": "situations"},
-    {"title": "Selling a House in Probate in Texas - Complete Guide", "slug": "selling-house-probate-texas", "keyword": "selling house probate Texas", "category": "inheritance"},
-    {"title": "What DFW Homeowners Need to Know About Cash Buyers in 2026", "slug": "dfw-homeowners-cash-buyers-2026", "keyword": "DFW cash buyers 2026", "category": "education"},
 ]
 
 
@@ -126,6 +116,28 @@ def get_next_topic():
     return {"title": title, "slug": slug, "keyword": keyword, "post_type": post_type, "extra_context": extra_context}
 
 
+def clean_json(text):
+    """Strip markdown fences and extract JSON object."""
+    text = re.sub(r'^```json\s*', '', text)
+    text = re.sub(r'\s*```$', '', text)
+    text = text.strip()
+    start = text.find('{')
+    end = text.rfind('}')
+    if start != -1 and end != -1:
+        text = text[start:end+1]
+    return text
+
+
+def repair_json(text):
+    """
+    Attempt to fix common JSON breakage caused by unescaped double quotes
+    inside HTML attribute values within the content_html field.
+    Replaces any double-quoted HTML attributes with single-quoted ones.
+    """
+    text = re.sub(r'(?<=\s)(href|src|class|id|style|rel|target)="([^"]*)"', r"\1='\2'", text)
+    return text
+
+
 def generate_post(topic: dict) -> dict:
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
@@ -142,29 +154,28 @@ ASSIGNMENT:
 - Title: {topic['title']}
 - Primary keyword: {topic['keyword']}
 - Additional context: {topic['extra_context']}
-- Word count: 800-1000 words
-- Include 2 call-to-action sections
+- Word count: 1,200-1,500 words
+- Include 3 call-to-action sections
 - Tone: Warm, helpful, professional but conversational
 
-CRITICAL REQUIREMENTS:
-1. Return ONLY a JSON object - no text before or after
-2. No markdown code fences
-3. All apostrophes in content_html must use HTML entity &apos; or be removed
-4. All double quotes inside JSON string values must be escaped with backslash
-5. Keep content_html under 3000 characters total
-6. Meta title under 60 characters
-7. Meta description under 160 characters
-8. Each CTA mentions 972-284-9713 and links to /#offer
+REQUIREMENTS:
+1. Write genuinely helpful content for Dallas-Fort Worth homeowners
+2. Use H2 and H3 subheadings naturally
+3. Each CTA mentions 972-284-9713 and links to /#offer
+4. Include Texas-specific context - community property laws, homestead exemption, no state income tax, Texas foreclosure timeline, HOA rules
+5. Meta title under 60 characters
+6. Meta description under 160 characters
+7. CRITICAL: In content_html, use single quotes for ALL HTML attributes (e.g. href='/#offer' not href="/#offer"). This is required so the JSON stays valid.
 
-JSON format:
+Return ONLY valid JSON (no markdown, no backticks):
 {{
   "meta_title": "...",
   "meta_description": "...",
   "h1": "...",
-  "intro": "2-3 sentences max",
-  "content_html": "<h2>Section 1</h2><p>Content here. No apostrophes.</p><h2>Section 2</h2><p>More content.</p><h2>Section 3</h2><p>Final section.</p>",
-  "word_count": 900,
-  "secondary_keywords": ["keyword1", "keyword2", "keyword3"]
+  "intro": "...(2-3 sentence intro)...",
+  "content_html": "...(HTML using only h2, h3, p, ul, ol, li, a tags — single quotes on all attributes)...",
+  "word_count": 0,
+  "secondary_keywords": ["...", "...", "..."]
 }}"""
 
     prompt_safe = prompt.encode('ascii', errors='replace').decode('ascii')
@@ -173,7 +184,7 @@ JSON format:
         try:
             message = client.messages.create(
                 model="claude-sonnet-4-5",
-                max_tokens=4000,
+                max_tokens=8000,
                 messages=[{"role": "user", "content": prompt_safe}]
             )
             break
@@ -186,40 +197,25 @@ JSON format:
 
     raw = message.content[0].text.strip()
 
-    def clean_json(text):
-        text = re.sub(r'^```json\s*', '', text)
-        text = re.sub(r'\s*```$', '', text)
-        text = text.strip()
-        start = text.find('{')
-        end = text.rfind('}')
-        if start != -1 and end != -1:
-            text = text[start:end+1]
-        return text
-
     try:
         return json.loads(clean_json(raw))
     except json.JSONDecodeError:
-        print("JSON parse failed - retrying with minimal prompt...")
-        prompt_minimal = f"""Write a real estate blog post for Top DFW House Buyers about: {topic['title']}
-
-Return ONLY this JSON with no apostrophes in content_html:
-{{
-  "meta_title": "Sell Your House Fast in DFW - Cash Offer",
-  "meta_description": "Top DFW House Buyers offers fast cash offers with no fees or repairs. Call 972-284-9713.",
-  "h1": "{topic['title']}",
-  "intro": "Selling your home in DFW does not have to be stressful. Top DFW House Buyers makes it simple with a fair cash offer in 24 hours.",
-  "content_html": "<h2>How We Buy Houses in DFW</h2><p>We buy houses throughout Dallas-Fort Worth in any condition. No repairs needed, no agent fees, no closing costs. Call us at 972-284-9713 or fill out our form to get started.</p><h2>Why DFW Homeowners Choose Us</h2><p>We close in as few as 7 days on your schedule. Our process is simple: tell us about your property, get a cash offer in 24 hours, and choose your closing date.</p><h2>Get Your Free Cash Offer Today</h2><p>Ready to sell your DFW home fast? Call 972-284-9713 or visit topdfwhousebuyers.com. We serve Plano, Frisco, Allen, McKinney, Richardson and all DFW cities.</p>",
-  "word_count": 150,
-  "secondary_keywords": ["sell house fast DFW", "cash home buyers Dallas", "we buy houses Texas"]
-}}"""
-        prompt_minimal_safe = prompt_minimal.encode('ascii', errors='replace').decode('ascii')
-        message3 = client.messages.create(
-            model="claude-sonnet-4-5",
-            max_tokens=2000,
-            messages=[{"role": "user", "content": prompt_minimal_safe}]
-        )
-        raw3 = message3.content[0].text.strip()
-        return json.loads(clean_json(raw3))
+        print("JSON parse failed - attempting repair...")
+        try:
+            return json.loads(repair_json(clean_json(raw)))
+        except json.JSONDecodeError:
+            print("Repair failed - retrying API with shorter word count...")
+            prompt_short = prompt_safe.replace('1,200-1,500 words', '700-900 words')
+            message2 = client.messages.create(
+                model="claude-sonnet-4-5",
+                max_tokens=6000,
+                messages=[{"role": "user", "content": prompt_short}]
+            )
+            raw2 = message2.content[0].text.strip()
+            try:
+                return json.loads(clean_json(raw2))
+            except json.JSONDecodeError:
+                return json.loads(repair_json(clean_json(raw2)))
 
 
 def build_html_page(post: dict, topic: dict) -> str:
