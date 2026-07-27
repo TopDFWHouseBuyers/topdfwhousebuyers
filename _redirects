@@ -36,6 +36,7 @@
 # ── Plano and Frisco without -tx suffix (old URLs) ────────────────────────
 /sell-my-house-fast-plano/                    /plano/                    301
 /sell-my-house-fast-frisco/                   /frisco/                   301
+/sell-my-house-fast-the-colony/                /the-colony/               301
 
 # ── Old blog posts → blog index ───────────────────────────────────────────
 /blog/equity-when-buying-or-selling-a-house/                             /blog/  301
