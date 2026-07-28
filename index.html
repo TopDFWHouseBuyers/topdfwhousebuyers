@@ -1211,9 +1211,11 @@ async function submitStep1(e) {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(formData).toString()
     });
-  } catch(err) {
+} catch(err) {
     console.log('Netlify form note:', err);
   }
+
+  gtag_report_conversion();
 
   // Pass data to step 2 fields (autofill)
   const email = document.getElementById('email').value;
